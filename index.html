@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <!--compatibilidad de navegadores-->
@@ -12,7 +12,89 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <!--Fuentes de Google -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body></body>
+  <body>
+    <!--Navbar-->
+    <nav class="navbar">
+      <div class="navbar__inner">
+        <!--Logo-->
+        <a href="index.html" class="navbar__logo">
+          🍓 SweetJam<span>.ar</span>
+        </a>
+        <!--links de navegación-->
+        <ul class="navbar__links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="pages/mermeladas.html">Mermeladas</a></li>
+          <li><a href="pages/conservas.html">Conservas</a></li>
+          <li><a href="pages/papel-mache.html">Papel Maché</a></li>
+          <li><a href="pages/cosmetica.html">Cosmética Natural</a></li>
+        </ul>
+        <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+      </div>
+    </nav>
+
+    <!--HERO-->
+    <section class="hero">
+      <h1 class="hero__title">Hecho con amor, directo a tu hogar</h1>
+      <p class="hero__subtitle">
+        Mermeladas, conservas y artesanías elaboradas de forma artesanal en
+        Argentina. Además de cosmética a tu alcance. Todo hecho con amor y
+        dedicación para que disfrutes de productos únicos y de calidad.
+      </p>
+    </section>
+
+    <!--CATEGORIAS -->
+    <main class="page-content">
+      <div class="categories-grid">
+        <a href="pages/mermeladas.html" class="category-card">
+          <div class="category-card__icon">🍓</div>
+          <h2 class="category-card__title">Mermeladas</h2>
+          <p class="category-card__desc">
+            Elaboradas con frutas frescas y sin conservantes artificiales.
+          </p>
+        </a>
+
+        <a href="pages/conservas.html" class="category-card">
+          <div class="category-card__icon">🫙</div>
+          <h2 class="category-card__title">Conservas</h2>
+          <p class="category-card__desc">
+            Escabeches, almíbares y preparaciones caseras listas para disfrutar.
+          </p>
+        </a>
+
+        <a href="pages/papel-mache.html" class="category-card">
+          <div class="category-card__icon">🎨</div>
+          <h2 class="category-card__title">Papel Maché</h2>
+          <p class="category-card__desc">
+            Artesanías únicas elaboradas a mano con técnica de papel maché.
+          </p>
+        </a>
+
+        <a href="pages/cosmetica.html" class="category-card">
+          <div class="category-card__icon">🧴</div>
+          <h2 class="category-card__title">Cosmética</h2>
+          <p class="category-card__desc">
+            Cremas, aceites ,serums , fragancias y más.
+          </p>
+        </a>
+      </div>
+    </main>
+    <!--Footer-->
+    <footer class="footer">
+      <p>2026 SweetJam.ar. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ en Argentina</p>
+      <ul class="footer__links">
+        <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </footer>
+    <!--Script-->
+    <script src="js/script.js"></script>
+  </body>
 </html>
