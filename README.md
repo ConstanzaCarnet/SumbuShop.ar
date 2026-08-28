@@ -1,10 +1,10 @@
-# SweetJam.ar
+# SumbuShop.ar
 
 **Autora:** Carnet Constanza Desireé
 
 ## Descripción
 
-SweetJam.ar es una tienda online de productos variados: mermeladas, conservas, artesanías en papel maché y cosmética natural. Podemos destacar que aunque se orienta a la promoción de productos artesanales, como mermeladas y manualidades, también consta de productos especializados como cremas, serums y fragancias.
+SumbuShop.ar es una tienda online de productos variados: mermeladas, conservas, artesanías en papel maché y cosmética natural. Podemos destacar que aunque se orienta a la promoción de productos artesanales, como mermeladas y manualidades, también consta de productos especializados como cremas, serums y fragancias.
 En resumen una página ecommerce para la promoción de productos variados.(tienda familiar)
 
 ## Tecnologías utilizadas
@@ -16,7 +16,7 @@ En resumen una página ecommerce para la promoción de productos variados.(tiend
 ## Estructura del proyecto
 
 ```
-sweetjamar/
+sumbu-shop.ar/
 ├── index.html              ← Página de inicio
 ├── README.md
 ├── css/
