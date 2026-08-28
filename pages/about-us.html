@@ -3,60 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SumbuShop.ar - Papel Maché</title>
-    <link rel="stylesheet" href="../styles/styles.css" />
+    <title>Sumbu Shop — Sobre Nosotros</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="../styles/styles.css" />
   </head>
-
   <body>
-    <!--Navbar-->
     <nav class="navbar">
       <div class="navbar__inner">
-        <!--Logo-->
-        <a href="../index.html" class="navbar__logo"
-          >🍓 SumbuShop<span>.ar</span></a
-        >
-        <!--links de navegación-->
+        <a href="../index.html" class="navbar__logo">🍓 Sumbu Shop</a>
         <ul class="navbar__links">
           <li><a href="../index.html">Home</a></li>
           <li><a href="jams.html">Mermeladas</a></li>
           <li><a href="preserved.html">Conservas</a></li>
-          <li><a href="mache-paper.html" class="active">Papel Maché</a></li>
+          <li><a href="mache-paper.html">Papel Maché</a></li>
           <li><a href="cosmetics.html">Cosmética Natural</a></li>
         </ul>
-        <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+        <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
       </div>
     </nav>
 
-    <!--Contenido de la página de papel maché-->
     <main class="page-content">
-      <h1>Papel Maché</h1>
-      <p>
-        Descubre nuestra variedad de productos de papel maché hechos a mano con
-        materiales reciclados y técnicas tradicionales. Cada pieza es única y
-        refleja la creatividad y dedicación de nuestros artesanos.
-      </p>
-      <h2
+      <h1
         style="
-          font-size: 1.1rem;
-          color: var(--color-text-light);
-          font-weight: 400;
-          margin-bottom: 2rem;
+          font-family: var(--font-display);
+          color: var(--color-primary);
+          font-size: 2rem;
+          margin-bottom: 1rem;
         "
       >
-        🎨 Productos de Papel Maché
-      </h2>
-      <p>
-        En construcción! Próximamente encontrarás aquí nuestra selección de
-        productos de papel maché.
+        Sobre Nosotros
+      </h1>
+      <p
+        style="
+          color: var(--color-text-light);
+          max-width: 600px;
+          line-height: 1.8;
+        "
+      >
+        Sumbu Shop es una tienda de productos artesanales elaborados con amor en
+        Argentina. Nuestras mermeladas, conservas, artesanías y cosmética
+        natural están hechas a mano, con ingredientes seleccionados y mucho
+        cuidado en cada detalle.
       </p>
+      <!-- TODO: completar con información real de la tienda -->
     </main>
 
-    <!--Footer-->
     <footer class="footer">
       <p>2026 SumbuShop.ar. Todos los derechos reservados.</p>
       <p>Hecho con ❤️ en Argentina</p>
@@ -67,7 +62,6 @@
       </ul>
     </footer>
 
-    <!--Script-->
     <script src="../js/navbar.js"></script>
   </body>
 </html>

@@ -19,17 +19,18 @@ En resumen una página ecommerce para la promoción de productos variados.(tiend
 sumbu-shop.ar/
 ├── index.html              ← Página de inicio
 ├── README.md
-├── css/
-│   └── styles.css          ← Estilos globales
+├── styles/
+│   ├── styles.css          ← Estilos globales
+|   └── forms.css           ← Estilos para formularios
 ├── js/
-│   └── navbar.js           ← Lógica del navbar
+│   ├── forms.js            ← Lógica de formulario(manejo de submit)
+│   └── navbar.js           ← Lógica del navbar(logout + link activo)
 └── pages/
     ├── login.html          ← Inicio de sesión
     ├── register.html       ← Registro de usuario
-    ├── sobre-nosotros.html ← Descripción del negocio
-    ├── contacto.html       ← Formas de contacto
-    ├── mermeladas.html     ← Categoría: Mermeladas
-    ├── conservas.html      ← Categoría: Conservas
-    ├── papel-mache.html    ← Categoría: Papel Maché
-    └── cosmetica.html      ← Categoría: Cosmética Natural
+    ├── about-us.html ← Descripción del negocio
+    ├── jams.html     ← Categoría: Mermeladas
+    ├── preserved.html      ← Categoría: Conservas
+    ├── mache-paper.html    ← Categoría: Papel Maché
+    └── cosmetic.html      ← Categoría: Cosmética Natural
 ```

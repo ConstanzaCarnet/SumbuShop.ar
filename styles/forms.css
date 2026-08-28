@@ -84,6 +84,31 @@
   gap: 1rem;
 }
 
+/* --- Checkbox (aceptar términos) --- */
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-check input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.form-check label {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+  line-height: 1.4;
+  cursor: pointer;
+}
+
 /* --- Botón submit --- */
 .btn-submit {
   width: 100%;
