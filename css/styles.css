@@ -1,0 +1,200 @@
+/* global styles---> esto va a servir para definir colores y fuentes globales */
+:root {
+  --color-bg: #fdf8f2;
+  --color-surface: #ffffff;
+  --color-primary: #c0392b;
+  --color-primary-dark: #96281b;
+  --color-accent: #e8a838;
+  --color-text: #2c2c2c;
+  --color-text-light: #6b6b6b;
+  --color-border: #e8ddd0;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Lato", Arial, sans-serif;
+
+  --radius: 8px;
+  --shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+  --transition: 0.2s ease-in-out;
+}
+
+/* Reset some default styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*navbar styles*/
+
+.navbar {
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-accent);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* logo styles */
+.navbar__logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+.navbar__logo span {
+  color: var(--color-accent);
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.navbar__links a {
+  display: block;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  color: var(--color-text);
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+}
+
+.navbar__links a:hover {
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+}
+
+.navbar__links a.active {
+  background-color: var(--color-primary);
+  font-weight: 700;
+}
+
+/*logout button styles*/
+.btn__logout {
+  background-color: none;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    color var(--transition);
+  white-space: nowrap;
+}
+
+.btn__logout:hover {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+/* general layout styles */
+.page-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+/*Hero section styles*/
+.hero {
+  background: linear-gradient(135deg, #fff8f0 0%, #fdebd0 100%);
+  border-bottom: 1px solid var(--color-border);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/*categories styles*/
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.category-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--color-border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.category-card:hover {
+  transform: translate(-4px);
+  box-shadow: 0 6px rgb(0, 0, 0, 0.12);
+}
+
+.category-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.category-card__desc {
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+}
+
+/* footer styles */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
