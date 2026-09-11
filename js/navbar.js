@@ -9,3 +9,13 @@
   Así los links funcionan igual en cualquier computadora, sin importar en qué
   carpeta se clone el repositorio (no dependemos de rutas absolutas tipo /pages/).
 */
+function rutaPages() {
+  const estoyEnPages = window.location.pathname.includes("/pages/");
+  return estoyEnPages ? "" : "pages/";
+}
+
+/*Cierra la sesión y vuelve al login*/
+function logout() {
+  localStorage.removeItem("usuario");
+  window.location.href = rutaPages() + "login.html";
+}
