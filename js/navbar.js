@@ -19,3 +19,17 @@ function logout() {
   localStorage.removeItem("usuario");
   window.location.href = rutaPages() + "login.html";
 }
+
+function getBasePath() {
+  return window.location.pathname.includes("/pages/") ? "../" : "";
+}
+
+(function markActiveLink() {
+  const links = document.querySelectorAll(".navbar-nav .nav-link");
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  links.forEach((link) => {
+    link.classList.remove("active");
+    const linkPage = link.getAttribute("href").split("/").pop();
+    if (linkPage === currentPage) link.classList.add("active");
+  });
+})();
