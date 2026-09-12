@@ -69,7 +69,7 @@
           <div class="d-flex align-items-center gap-2">
             <button
               id="themeToggle"
-              class="btn-theme"
+              class="btn__theme"
               onclick="toggleTheme()"
               title="Cambiar tema"
             >
@@ -108,54 +108,192 @@
       <div class="hero__image"></div>
     </section>
 
-    <!--CATEGORIAS -->
-    <main class="page-content">
-      <div class="categories-grid">
-        <a href="pages/jams.html" class="category-card">
-          <div class="category-card__icon">🍓</div>
-          <h2 class="category-card__title">Mermeladas</h2>
-          <p class="category-card__desc">
-            Elaboradas con frutas frescas y sin conservantes artificiales.
-          </p>
-        </a>
+    <!--PRESENTACION-->
+    <main>
+      <div class="presentacion__bar">
+        <div class="container">
+          <div class="row g-0">
+            <div class="col-6 col-md-3">
+              <div class="presentacion__item">
+                <span class="presentacion__icon">🚚</span>
+                <div>
+                  <div class="presentacion__label">Envíos a todo el país</div>
+                  <div class="presentacion__desc">
+                    Entregamos a todo el territorio nacional
+                  </div>
+                </div>
+              </div>
 
-        <a href="pages/preserved.html" class="category-card">
-          <div class="category-card__icon">🫙</div>
-          <h2 class="category-card__title">Conservas</h2>
-          <p class="category-card__desc">
-            Escabeches, almíbares y preparaciones caseras listas para disfrutar.
-          </p>
-        </a>
+              <div class="presentacion__item">
+                <span class="presentacion__icon">💳</span>
+                <div>
+                  <div class="presentacion__label">Pagos seguros</div>
+                  <div class="presentacion__desc">
+                    Aceptamos tarjetas y transferencias
+                  </div>
+                </div>
+              </div>
 
-        <a href="pages/mache-paper.html" class="category-card">
-          <div class="category-card__icon">🎨</div>
-          <h2 class="category-card__title">Papel Maché</h2>
-          <p class="category-card__desc">
-            Artesanías únicas elaboradas a mano con técnica de papel maché.
-          </p>
-        </a>
+              <div class="presentacion__item">
+                <span class="presentacion__icon">❤️</span>
+                <div>
+                  <div class="presentacion__label">Con amor</div>
+                  <div class="presentacion__desc">
+                    Desde Córdoba, Argentina, con dedicación y cariño
+                  </div>
+                </div>
+              </div>
 
-        <a href="pages/cosmetics.html" class="category-card">
-          <div class="category-card__icon">🧴</div>
-          <h2 class="category-card__title">Cosmética</h2>
-          <p class="category-card__desc">
-            Cremas, aceites ,serums , fragancias y más.
-          </p>
-        </a>
+              <div class="presentacion__item">
+                <span class="presentacion__icon">📞</span>
+                <div>
+                  <div class="presentacion__label">Atención al cliente</div>
+                  <div class="presentacion__desc">
+                    Estamos aquí para ayudarte
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!--CATEGORIAS -->
+      <section class="py__section bg__cream">
+        <div class="container">
+          <div class="d-flex aling-items-end justify-content-between mb-4">
+            <div>
+              <p class="section__eyebrown">Lo que encontrás</p>
+              <h2 class="section__title">Nuestras categorías</h2>
+            </div>
+            <a href="pages/jams.html" class="section-link">Ver todo →</a>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6 col-md-3">
+              <a href="pages/jams.html" class="cat-card">
+                <div class="cat-img jam">🍓</div>
+                <div class="cat__body">
+                  <div class="cat__name">Mermeladas</div>
+                  <div class="cat__desc">
+                    Elaboradas con frutas frescas y sin conservantes
+                    artificiales.
+                  </div>
+                  <span class="cat__link">Ver más →</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6 col-md-3">
+              <a href="pages/preserved.html" class="cat-card">
+                <div class="cat-img preserved">🍇</div>
+                <div class="cat__body">
+                  <div class="cat__name">Conservas</div>
+                  <div class="cat__desc">
+                    Escabeches, almíbares y preparaciones caseras listas para
+                    disfrutar.
+                  </div>
+                  <span class="cat__link">Ver más →</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6 col-md-3">
+              <a href="pages/mache-paper.html" class="cat-card">
+                <div class="cat-img mache">🎨</div>
+                <div class="cat__body">
+                  <div class="cat__name">Papel Maché</div>
+                  <div class="cat__desc">
+                    Artesanías únicas elaboradas a mano con técnica de papel
+                    maché.
+                  </div>
+                  <span class="cat__link">Ver más →</span>
+                </div>
+              </a>
+            </div>
+            <div class="col-6 col-md-3">
+              <a href="pages/cosmetics.html" class="cat-card">
+                <div class="cat-img cosmetics">🧴</div>
+                <div class="cat__body">
+                  <div class="cat__name">Cosmética</div>
+                  <div class="cat__desc">
+                    Cremas, aceites ,serums , fragancias y más.
+                  </div>
+                  <span class="cat__link">Ver más →</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--Sobre nosotros-->
+      <section class="py-section bg-cream">
+        <div class="container">
+          <div class="about-section">
+            <div class="row g-0">
+              <div
+                class="col-md-7 p-4 p-md-5 d-flex flex-column justify-content-center"
+              >
+                <p class="about-label">Nuestra historia</p>
+                <h2 class="about-title">La calidad que nos define.</h2>
+                <p class="about-body">
+                  En Sumbu Shop creemos que lo bueno trae alegría. Por eso, nos
+                  dedicamos a vender productos de calidad. Desde mermeladas y
+                  conservas hasta artesanías y cosmética natural, cada artículo
+                  que ofrecemos tiene una historia única que contar. Queremos
+                  que cada experiencia de compra sea especial y memorable para
+                  nuestros clientes.
+                </p>
+                <div>
+                  <a
+                    href="pages/sobre-nosotros.html"
+                    class="btn btn-outline-primary"
+                    style="
+                      border-color: rgba(255, 255, 255, 0.5) !important;
+                      color: #fff !important;
+                    "
+                  >
+                    Conocer más →
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="about-visual">🫙</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
     <!--Footer-->
-    <footer class="footer">
-      <p>2026 SumbuShop.ar. Todos los derechos reservados.</p>
-      <p>Hecho con ❤️ en Argentina</p>
-      <ul class="footer__links">
-        <li><a href="pages/about-us.html">Sobre Nosotros</a></li>
-        <!--Aun sin definir el contacto, pongo este de ejemplo -->
-        <li><a href="mailto:consultas@correo.com">Contacto</a></li>
-      </ul>
+    <footer class="site-footer py-4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="footer-logo">🍓 Sumbu Shop</div>
+            <div>Hecho con ❤️ en Argentina</div>
+          </div>
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+            <div class="d-flex justify-content-center gap-4">
+              <a href="pages/sobre-nosotros.html">Sobre Nosotros</a>
+              <a href="mailto:consultasDeMentiritaPorAhora@correo.com"
+                >Contacto</a
+              >
+            </div>
+          </div>
+          <div class="col-md-4 text-md-end">
+            © 2026 Sumbu Shop. Todos los derechos reservados.
+          </div>
+        </div>
+      </div>
     </footer>
     <!--Script-->
-    <script src="js/navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/navbar.js"></script>
   </body>
 </html>

@@ -18,7 +18,7 @@
   --radius-lg: 20px;
   --radius-pill: 999px;
 }
-/* Reset some default styles */
+/* Reset algunos estilos que son por defecto */
 *,
 *::before,
 *::after {
@@ -38,16 +38,101 @@ a {
   text-decoration: none;
   color: inherit;
 }
+/*botones navegacion*/
+.btn__theme {
+  background: none;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-soft);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+  flex-shrink: 0;
+}
+.btn__theme:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+/*Sobreescribiendo estilos de bootstrap por la paleta de colores*/
+.btn-primary {
+  background-color: var(
+    --color-primary
+  ) !important; /*con esto se sobreescriben los estilos de bootstrap y se aplica el color primario definido en la paleta de colores*/
+  border-color: var(--color-primary) !important;
+  color: #fff !important;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-pill) !important;
+  transition:
+    background-color 0.2s,
+    border-color 0.15s;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dk) !important;
+  border-color: var(--color-primary-dk) !important;
+  transform: translateY(-1px);
+}
+.btn-outline-primary {
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: var(--radius-pill) !important;
+  transition: all 0.2s;
+}
+.btn-outline-primary:hover {
+  background-color: var(--color-primary) !important;
+  color: #fff !important;
+}
 
 /*navbar styles*/
 
 .navbar {
   background-color: var(--color-surface);
-  border-bottom: 2px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow);
   position: sticky;
+  padding: 0.5rem 0;
   top: 0;
   z-index: 100;
+}
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary) !important;
+  letter-spacing: -0.3px;
+}
+.navbar-brand span {
+  color: var(--color-accent);
+}
+.navbar-link {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text--soft) !important;
+  transition:
+    color var(--transition),
+    background-color var(--transition);
+  letter-spacing: -0.2px;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: var(--color-primary) !important;
+  background-color: rgba(192, 74, 42, 0.06);
 }
 
 .navbar__inner {
@@ -61,68 +146,23 @@ a {
   gap: 1rem;
 }
 
-/* logo styles */
-/*.navbar__logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  letter-spacing: -0.5px;
-  white-space: nowrap;
-}*/
-
-/*.navbar__logo span {
-  color: var(--color-accent);
-}*/
-
-.navbar__links {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  list-style: none;
-}
-
-.navbar__links a {
-  display: block;
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius);
-  font-weight: 500;
-  color: var(--color-text);
-  transition:
-    background-color var(--transition),
-    color var(--transition);
-}
-
-.navbar__links a:hover {
-  background-color: var(--color-bg);
-  color: var(--color-primary);
-}
-
-.navbar__links a.active {
-  background-color: var(--color-primary);
-  font-weight: 700;
-}
-
 /*logout button styles*/
-.btn__logout {
-  background-color: none;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  padding: 0.35rem 1rem;
-  border-radius: var(--radius);
+.btn-logout {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+  background: none;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-pill);
   cursor: pointer;
-  transition:
-    background-color var(--transition),
-    color var(--transition);
-  white-space: nowrap;
+  transition: all 0.2s;
 }
 
-.btn__logout:hover {
+.btn-logout:hover {
   background-color: var(--color-primary);
-  color: white;
+  color: #fff;
 }
 
 /* general layout styles */
@@ -209,6 +249,39 @@ a {
   background-color: var(--color-primary);
   color: #fff;
 }
+*/Presentacion de la empresa*/ .presentacion__bar {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.presentacion__item {
+  padding: 1.25rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-right: 1px solid var(--color-border);
+}
+.presentacion__item:last-child {
+  border-right: none;
+}
+
+.presentacion__icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+.presentacion__label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+  margin-bottom: 1px;
+}
+.presentacion__desc {
+  font-size: 0.7rem;
+  color: var(--color-text-soft);
+}
+
 /*categories styles*/
 
 .categories-grid {
