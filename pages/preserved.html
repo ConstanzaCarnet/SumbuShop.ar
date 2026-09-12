@@ -13,21 +13,52 @@
   </head>
   <body>
     <!--Navbar-->
-    <nav class="navbar">
-      <div class="navbar__inner">
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container-fluid">
         <!--Logo-->
-        <a href="../index.html" class="navbar__logo"
-          >🍓 SumbuShop<span>.ar</span></a
-        >
+        <a href="../index.html" class="navbar-brand">
+          🍓 SumbuShop<span>.ar</span>
+        </a>
         <!--links de navegación-->
-        <ul class="navbar__links">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="jams.html">Mermeladas</a></li>
-          <li><a href="preserved.html" class="active">Conservas</a></li>
-          <li><a href="mache-paper.html">Papel Maché</a></li>
-          <li><a href="cosmetics.html">Cosmética Natural</a></li>
-        </ul>
-        <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
+            <li class="nav-item">
+              <a href="../index.html" class="nav-link active">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="jams.html" class="nav-link">Mermeladas</a>
+            </li>
+            <li class="nav-item">
+              <a href="preserved.html" class="nav-link">Conservas</a>
+            </li>
+            <li class="nav-item">
+              <a href="mache-paper.html" class="nav-link">Papel Maché</a>
+            </li>
+            <li class="nav-item">
+              <a href="cosmetics.html" class="nav-link">Cosmética Natural</a>
+            </li>
+          </ul>
+          <!--Botones de tema y cierre de sesión-->
+          <div class="d-flex align-items-center gap-2">
+            <button
+              id="themeToggle"
+              class="btn__theme"
+              onclick="toggleTheme()"
+              title="Cambiar tema"
+            >
+              🌙
+            </button>
+            <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+          </div>
+        </div>
       </div>
     </nav>
 
