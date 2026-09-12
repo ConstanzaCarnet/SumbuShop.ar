@@ -514,7 +514,7 @@ main {
   flex: 1;
 }
 /* footer styles */
-.footer__about {
+footer {
   bottom: 0;
   width: 100%;
 }
