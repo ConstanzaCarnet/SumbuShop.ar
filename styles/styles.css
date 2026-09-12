@@ -2,7 +2,7 @@
 :root {
   --color-primary: #c04a2a;
   --color-primary-dk: #9e3a1e;
-  --color-header: #ecd3b1;
+  --color-header: linear-gradient(135deg, #ffece2, #ff9b61);
   --color-accent: #d4843a;
   --color-bg: #fdf8f2;
   --color-surface: #ffffff;
