@@ -515,7 +515,6 @@ main {
 }
 /* footer styles */
 .footer__about {
-  position: absolute;
   bottom: 0;
   width: 100%;
 }
