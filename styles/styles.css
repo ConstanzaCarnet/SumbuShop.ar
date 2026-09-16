@@ -117,7 +117,7 @@ a {
 }
 .navbar-brand {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-primary) !important;
   letter-spacing: -0.3px;
@@ -127,7 +127,7 @@ a {
 }
 .navbar-link {
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--color-text--soft) !important;
   transition:
@@ -251,9 +251,14 @@ a {
 }
 /*Presentacion de la empresa*/
 .presentacion__bar {
+  background-color: #fff5eb;
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
+  padding: 0;
+}
+.presentacion__bar .container-fluid {
+  padding-left: 3.5%;
+  padding-right: 0%;
 }
 
 .presentacion__item {
@@ -272,14 +277,15 @@ a {
   flex-shrink: 0;
 }
 .presentacion__label {
-  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--color-text);
   line-height: 1.2;
   margin-bottom: 1px;
 }
 .presentacion__desc {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--color-text-soft);
 }
 
@@ -361,19 +367,19 @@ a {
 
 .cat__name {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.25rem;
 }
 .cat__desc {
-  font-size: 0.78rem;
-  color: var(--color-text-soft);
+  font-size: 1rem;
+  color: var(--color-text);
   margin-bottom: 0.6rem;
 }
 
 .cat__link {
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-primary);
 }
@@ -418,6 +424,15 @@ a {
   justify-content: center;
   font-size: 6rem;
   min-height: 220px;
+  overflow: hidden;
+  padding: 0;
+}
+.about__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 /*cards de los productos,
 página de categorias*/
