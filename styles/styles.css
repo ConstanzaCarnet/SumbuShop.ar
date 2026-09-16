@@ -364,6 +364,9 @@ a {
 .cat__img.cosmetics {
   background: linear-gradient(145deg, #e4f2e8, #b8dfc0);
 }
+.cat__img.bakery {
+  background: linear-gradient(145deg, #cfc8f4, #966fe0);
+}
 
 .cat__body {
   padding: 1rem 1.1rem 1.25rem;
@@ -448,6 +451,10 @@ página de categorias*/
   transition:
     transform 0.2s,
     box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 .product__card:hover {
   transform: translateY(-4px);
@@ -469,6 +476,9 @@ página de categorias*/
 
 .product__card__body {
   padding: 1rem 1.1rem 1.25rem;
+  padding: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .product__card__cat {
@@ -500,6 +510,7 @@ página de categorias*/
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--color-primary);
+  margin-top: auto;
   margin-bottom: 0.75rem;
 }
 .py__section {
