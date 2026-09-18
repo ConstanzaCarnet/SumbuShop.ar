@@ -1,4 +1,4 @@
-/* global styles---> esto va a servir para definir colores y fuentes globales */
+/* global styles---> esto va a servir para definir colores y fuentes globales(theme: ligth por defecto) */
 :root {
   --color-primary: #c04a2a;
   --color-primary-dk: #9e3a1e;
@@ -23,6 +23,81 @@
 /* general layout styles */
 .page__content {
   margin: 0 auto;
+}
+/*Modo oscuro*/
+[data-theme="dark"] {
+  --color-primary: #e8603a;
+  --color-primary-dk: #c04a2a;
+  --color-header: linear-gradient(135deg, #42261cb0, #7a351f);
+  --color-accent: #e8a838;
+  --color-bg: #1a110b;
+  --color-surface: #38271d;
+  --color-text: #f0e6da;
+  --color-text-soft: #d8ccc5;
+  --color-border: #3a2820;
+}
+[data-theme="dark"] .hero_eyebrow {
+  color: var(--color-accent);
+}
+[data-theme="dark"] .hero__subtitle {
+  color: #d4b8a8;
+}
+[data-theme="dark"] .trust__bar {
+  background-color: #1f1208;
+}
+/* Cards de categoría en dark mode */
+[data-theme="dark"] .cat__card {
+  background: #2e1c10;
+  border-color: #3a2820;
+}
+
+[data-theme="dark"] .cat__img.jam {
+  background: linear-gradient(145deg, #5a2010, #3a1008);
+}
+[data-theme="dark"] .cat__img.preserved {
+  background: linear-gradient(145deg, #4a3008, #2e1e04);
+}
+[data-theme="dark"] .cat__img.mache {
+  background: linear-gradient(145deg, #0e1e3a, #081428);
+}
+[data-theme="dark"] .cat__img.cosmetics {
+  background: linear-gradient(145deg, #0e2e14, #081e0c);
+}
+[data-theme="dark"] .hero__cat.bakery {
+  background: linear-gradient(145deg, #401e7c, #190e2e);
+}
+
+/* Navbar en dark mode */
+[data-theme="dark"] .navbar {
+  background-color: #1a110b;
+  border-bottom-color: #3a2820;
+}
+
+/* Footer en dark mode */
+[data-theme="dark"] .site__footer {
+  background: #0f0805;
+}
+/* Toggle button en el navbar */
+.btn-theme {
+  background: none;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-soft);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+  flex-shrink: 0;
+}
+.btn-theme:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 /* Reset algunos estilos que son por defecto */
@@ -105,15 +180,32 @@ a {
 }
 
 /*navbar styles*/
-
+.btn__theme {
+  width: 35px;
+  height: 35px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
 .navbar {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  box-shadow: var(--shadow);
+  box-shadow: 0 2px 8px rgba(58, 37, 24, 0.08);
   position: sticky;
-  padding: 0.5rem 0;
   top: 0;
   z-index: 100;
+  min-height: 64px;
+  padding: 0 !important;
+}
+.navbar .container,
+.navbar .container-fluid {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .navbar-brand {
   font-family: var(--font-display);
@@ -125,21 +217,19 @@ a {
 .navbar-brand span {
   color: var(--color-accent);
 }
-.navbar-link {
-  font-family: var(--font-body);
-  font-size: 1rem;
+.nav-link {
+  font-family: var(--font-body) !important;
+  color: var(--color-text-soft);
+  font-size: 1rem !important;
   font-weight: 500;
-  color: var(--color-text--soft) !important;
   transition:
     color var(--transition),
     background-color var(--transition);
   letter-spacing: -0.2px;
 }
-
-.navbar-link:hover,
-.navbar-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--color-primary) !important;
-  background-color: rgba(192, 74, 42, 0.06);
 }
 
 .navbar__inner {
@@ -211,7 +301,7 @@ a {
   font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 700;
   line-height: 1.15;
-  color: #3a2518;
+  color: var(--color-text);
   margin-bottom: 1rem;
 }
 
@@ -350,6 +440,11 @@ a {
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.about__header {
+  background: var(--color-header);
+  padding: 4rem 0;
 }
 
 .cat__img.jam {

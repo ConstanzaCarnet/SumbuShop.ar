@@ -28,13 +28,45 @@
 
   <body>
     <!--Navbar-->
-    <nav class="navbar navbar-expand-lg sticky-top">
-      <div class="container-fluid">
-        <!--Logo-->
-        <a href="index.html" class="navbar-brand">
+    <nav
+      class="navbar navbar-expand-lg sticky-top"
+      style="
+        background-color: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 2px 8px rgba(58, 37, 24, 0.08);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        min-height: 64px;
+        padding: 0 !important;
+      "
+    >
+      <div
+        class="container-fluid"
+        style="
+          min-height: 85px;
+          display: flex;
+          align-items: center;
+          padding-top: 0;
+          padding-bottom: 0;
+        "
+      >
+        <!-- Logo -->
+        <a
+          href="index.html"
+          class="navbar-brand"
+          style="
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary) !important;
+            letter-spacing: -0.3px;
+          "
+        >
           🍓 SumbuShop<span>.ar</span>
         </a>
-        <!--links de navegación-->
+
+        <!-- Links de navegación -->
         <button
           class="navbar-toggler border-0"
           type="button"
@@ -43,42 +75,93 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="mainNav">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1">
             <li class="nav-item">
-              <a href="index.html" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/jams.html" class="nav-link">Mermeladas</a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/preserved.html" class="nav-link">Conservas</a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/mache-paper.html" class="nav-link">Papel Maché</a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/cosmetics.html" class="nav-link"
-                >Cosmética</a
+              <a
+                href="index.html"
+                class="nav-link active"
+                style="font-size: 1.3rem !important"
+                >Home</a
               >
             </li>
+
             <li class="nav-item">
-              <a href="pages/bakery.html" class="nav-link"
+              <a
+                href="pages/jams.html"
+                class="nav-link"
+                style="font-size: 1.3rem !important"
+                >Mermeladas</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                href="pages/preserved.html"
+                class="nav-link"
+                style="font-size: 1.3rem !important"
+                >Conservas</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a
+                href="pages/bakery.html"
+                class="nav-link"
+                style="font-size: 1.3rem !important"
                 >Pastelería</a
               >
             </li>
+
+            <li class="nav-item">
+              <a
+                href="pages/mache-paper.html"
+                class="nav-link"
+                style="font-size: 1.3rem !important"
+              >
+                Papel Maché
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                href="pages/cosmetics.html"
+                class="nav-link"
+                style="font-size: 1.3rem !important"
+              >
+                Cosmética
+              </a>
+            </li>
           </ul>
 
+          <!-- Botones de tema y cierre de sesión -->
           <div class="d-flex align-items-center gap-2">
             <button
               id="themeToggle"
               class="btn__theme"
               onclick="toggleTheme()"
               title="Cambiar tema"
+              style="
+                width: 45px;
+                height: 45px;
+                font-size: 25px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+              "
             >
               🌙
             </button>
-            <button class="btn-logout" onclick="logout()">Cerrar Sesión</button>
+
+            <button
+              class="btn-logout"
+              onclick="logout()"
+              style="font-size: 1.1rem !important"
+            >
+              Cerrar Sesión
+            </button>
           </div>
         </div>
       </div>
@@ -120,7 +203,7 @@
           <div class="row g-0">
             <div class="col-6 col-md-3">
               <div class="presentacion__item">
-                <!--<span class="presentacion__icon">🚚</span>--> 
+                <!-- <span class="presentacion__icon">🚚</span> -->
                 <div>
                   <div class="presentacion__label">Envíos a todo el país</div>
                   <div class="presentacion__desc">
@@ -129,10 +212,9 @@
                 </div>
               </div>
             </div>
-
             <div class="col-6 col-md-3">
               <div class="presentacion__item">
-                <!--<span class="presentacion__icon">💳</span>--> 
+                <!-- <span class="presentacion__icon">💳</span> -->
                 <div>
                   <div class="presentacion__label">Pagos seguros</div>
                   <div class="presentacion__desc">
@@ -141,10 +223,9 @@
                 </div>
               </div>
             </div>
-
             <div class="col-6 col-md-3">
               <div class="presentacion__item">
-                <!--<span class="presentacion__icon">❤️</span>--> 
+                <!-- <span class="presentacion__icon">❤️</span> -->
                 <div>
                   <div class="presentacion__label">Con amor</div>
                   <div class="presentacion__desc">
@@ -153,15 +234,13 @@
                 </div>
               </div>
             </div>
-
-              <div class="col-6 col-md-3">
-                <div class="presentacion__item">
-                 <!--<span class="presentacion__icon">📞</span>--> 
-                  <div>
-                    <div class="presentacion__label">Atención al cliente</div>
-                    <div class="presentacion__desc">
-                      Estamos aquí para ayudarte
-                    </div>
+            <div class="col-6 col-md-3">
+              <div class="presentacion__item">
+                <!-- <span class="presentacion__icon">📞</span> -->
+                <div>
+                  <div class="presentacion__label">Atención al cliente</div>
+                  <div class="presentacion__desc">
+                    Estamos aquí para ayudarte
                   </div>
                 </div>
               </div>
@@ -169,25 +248,24 @@
           </div>
         </div>
       </div>
-
       <!--CATEGORIAS -->
       <section class="py__section bg__cream">
         <div class="container">
-          <div class="d-flex aling-items-end justify-content-between mb-4">
+          <div class="d-flex align-items-end justify-content-between mb-4">
             <div>
               <p class="section__eyebrown">Lo que encontrás</p>
               <h2 class="section__title">Nuestras categorías</h2>
             </div>
-            <!-- <a href="pages/jams.html" class="section-link">Ver todo →</a> -->
+            <!-- <a href="pages/jams.html" class="section-link"> Ver todo → </a> -->
           </div>
-
           <div class="row g-3">
+            <!-- Mermeladas -->
             <div class="col-6 col-md d-flex">
               <a href="pages/jams.html" class="cat__card">
                 <div class="cat__img jam">
                   <img
-                  src="img/mermeladas/mermeladaDeFrutillas.jpg"       
-                  alt="external-jam-healthy-food-and-vegan-justicon-lineal-color-justicon"
+                    src="img/mermeladas/mermeladaDeFrutillas.jpg"
+                    alt="Mermelada de frutillas"
                   />
                 </div>
                 <div class="cat__body">
@@ -196,17 +274,17 @@
                     Elaboradas con frutas frescas y sin conservantes
                     artificiales.
                   </div>
-                  <span class="cat__link">Ver más →</span>
+                  <span class="cat__link"> Ver más → </span>
                 </div>
               </a>
             </div>
-
+            <!-- Conservas -->
             <div class="col-6 col-md d-flex">
               <a href="pages/preserved.html" class="cat__card">
                 <div class="cat__img preserved">
                   <img
                     src="img/Conservas/Pepinillos.jpg"
-                    alt="external-pickle-healthy-food-and-vegan-justicon-lineal-color-justicon"
+                    alt="Conservas y pepinillos"
                   />
                 </div>
                 <div class="cat__body">
@@ -215,52 +293,54 @@
                     Escabeches, almíbares y preparaciones caseras listas para
                     disfrutar.
                   </div>
-                  <span class="cat__link">Ver más →</span>
+                  <span class="cat__link"> Ver más → </span>
                 </div>
               </a>
             </div>
-
+            <!-- Pastelería -->
             <div class="col-6 col-md d-flex">
               <a href="pages/bakery.html" class="cat__card">
                 <div class="cat__img preserved">
                   <img
                     src="img/Pastelería/ChocolateEspiral.png"
-                    alt="external-pickle-healthy-food-and-vegan-justicon-lineal-color-justicon"
+                    alt="Producto de pastelería"
                   />
                 </div>
                 <div class="cat__body">
                   <div class="cat__name">Pastelería</div>
                   <div class="cat__desc">
-                    Tartas dulces, bizcochuelos, pastelitos y más, dulces y saladas.
+                    Tartas dulces, bizcochuelos, pastelitos y más, dulces y
+                    saladas.
                   </div>
-                  <span class="cat__link">Ver más →</span>
+                  <span class="cat__link"> Ver más → </span>
                 </div>
               </a>
             </div>
+            <!-- Cosmética -->
             <div class="col-6 col-md d-flex">
               <a href="pages/cosmetics.html" class="cat__card">
                 <div class="cat__img cosmetics">
                   <img
                     src="img/Cosmética/cosmeticaGral.jpg"
-                    alt="external-cream-sauna-flatart-icons-lineal-color-flatarticons"
+                    alt="Productos de cosmética"
                   />
                 </div>
                 <div class="cat__body">
                   <div class="cat__name">Cosméticos</div>
                   <div class="cat__desc">
-                    Cremas, aceites ,serums , fragancias y más.
+                    Cremas, aceites, serums, fragancias y más.
                   </div>
-                  <span class="cat__link">Ver más →</span>
+                  <span class="cat__link"> Ver más → </span>
                 </div>
               </a>
             </div>
-
+            <!-- Papel Maché -->
             <div class="col-6 col-md d-flex">
               <a href="pages/mache-paper.html" class="cat__card">
                 <div class="cat__img mache">
                   <img
                     src="img/PapelMache/botellaDecorada.jpeg"
-                    alt="external-origami-japan-photo3ideastudio-lineal-color-photo3ideastudio"
+                    alt="Artesanía de papel maché"
                   />
                 </div>
                 <div class="cat__body">
@@ -269,7 +349,7 @@
                     Artesanías únicas elaboradas a mano con técnica de papel
                     maché.
                   </div>
-                  <span class="cat__link">Ver más →</span>
+                  <span class="cat__link"> Ver más → </span>
                 </div>
               </a>
             </div>
@@ -310,7 +390,7 @@
               </div>
               <div class="col-md-5">
                 <div class="about__visual">
-                  <img src="img/Oh!Florecillas.jpg" alt=""/>
+                  <img src="img/Oh!Florecillas.jpg" alt="" />
                 </div>
               </div>
             </div>
@@ -343,7 +423,6 @@
     <!--Script-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/navbar.js"></script>
-    <!--Tema-->
-    <script src="js/theme.js" defer></script>
+    <script src="js/theme.js"></script>
   </body>
 </html>
