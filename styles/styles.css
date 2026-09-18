@@ -51,20 +51,20 @@
   border-color: #3a2820;
 }
 
-[data-theme="dark"] .cat__img.jam {
+[data-theme="dark"] .header__jam {
   background: linear-gradient(145deg, #5a2010, #3a1008);
 }
-[data-theme="dark"] .cat__img.preserved {
+[data-theme="dark"] .header__preserved {
   background: linear-gradient(145deg, #4a3008, #2e1e04);
 }
-[data-theme="dark"] .cat__img.mache {
+[data-theme="dark"] .header__mache {
   background: linear-gradient(145deg, #0e1e3a, #081428);
 }
-[data-theme="dark"] .cat__img.cosmetics {
+[data-theme="dark"] .header__cosmetics {
   background: linear-gradient(145deg, #0e2e14, #081e0c);
 }
-[data-theme="dark"] .hero__cat.bakery {
-  background: linear-gradient(145deg, #401e7c, #190e2e);
+[data-theme="dark"] .header__bakery {
+  background: linear-gradient(145deg, #552c9b, #301b58);
 }
 
 /* Navbar en dark mode */
@@ -341,7 +341,7 @@ a {
 }
 /*Presentacion de la empresa*/
 .presentacion__bar {
-  background-color: #fff5eb;
+  background-color: var(--color-border);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   padding: 0;
@@ -447,20 +447,25 @@ a {
   padding: 4rem 0;
 }
 
-.cat__img.jam {
+.header__jam {
   background: linear-gradient(145deg, #fde8dc, #f5c4a8);
+  padding: 3.5rem 0;
 }
-.cat__img.preserved {
+.header__preserved {
   background: linear-gradient(145deg, #fef0d0, #f5d48a);
+  padding: 3.5rem 0;
 }
-.cat__img.mache {
+.header__mache {
   background: linear-gradient(145deg, #e8f0fc, #c8d8f4);
+  padding: 3.5rem 0;
 }
-.cat__img.cosmetics {
+.header__cosmetics {
   background: linear-gradient(145deg, #e4f2e8, #b8dfc0);
+  padding: 3.5rem 0;
 }
-.cat__img.bakery {
+.header__bakery {
   background: linear-gradient(145deg, #cfc8f4, #966fe0);
+  padding: 3.5rem 0;
 }
 
 .cat__body {
@@ -617,10 +622,6 @@ página de categorias*/
 }
 
 /*sobre nosotros--PAGES*/
-.about__header {
-  background: linear-gradient(135deg, #fde8dc, #f5c4a8);
-  padding: 3.5rem 0;
-}
 .about__title {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vm, 2.2rem);
