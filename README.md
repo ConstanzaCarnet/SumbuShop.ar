@@ -24,6 +24,7 @@ sumbu-shop.ar/
 |   └── forms.css           ← Estilos para formularios
 ├── js/
 │   ├── forms.js            ← Lógica de formulario(manejo de submit)
+|   ├── theme.js            ← Lógica de theme(dark or ligth)
 │   └── navbar.js           ← Lógica del navbar(logout + link activo)
 └── pages/
     ├── login.html          ← Inicio de sesión
@@ -31,6 +32,7 @@ sumbu-shop.ar/
     ├── about-us.html ← Descripción del negocio
     ├── jams.html     ← Categoría: Mermeladas
     ├── preserved.html      ← Categoría: Conservas
+    ├── bakery.html      ← Categoría: Pastelería
     ├── mache-paper.html    ← Categoría: Papel Maché
     └── cosmetic.html      ← Categoría: Cosmética Natural
 ```
