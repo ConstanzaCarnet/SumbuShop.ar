@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sumbu Shop — Mi carrito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script src="../js/theme.js"></script>
+  </head>
+  <body>
+
+    <div id="navbar-container"></div>
+
+    <main class="py__section bg__cream" style="min-height: 70vh;">
+      <div class="container" style="max-width: 720px;">
+
+        <div class="mb-4">
+          <p class="section__eyebrown">Sumbu Shop</p>
+          <h1 class="section__title">Mi carrito</h1>
+        </div>
+
+        <!-- Estado: carrito vacío -->
+        <div id="cart-empty" class="text-center py-5" style="display:none;">
+          <div style="font-size:3rem; margin-bottom:1rem;">🛒</div>
+          <h3 style="color:var(--color-text); margin-bottom:.5rem;">Tu carrito está vacío</h3>
+          <p style="color:var(--color-text-soft); margin-bottom:1.5rem;">
+            Explorá nuestras categorías y encontrá algo que te guste.
+          </p>
+          <a href="../index.html" class="btn btn__sumbu">Ver productos</a>
+        </div>
+
+        <!-- Lista de items -->
+        <div id="cart-items"></div>
+
+        <!-- Resumen y pago -->
+        <div id="cart-summary" style="display:none;">
+          <hr style="border-color: var(--color-border, #e0d5cc); margin: 1.5rem 0;" />
+
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span style="color:var(--color-text-soft);">Subtotal</span>
+            <span id="cart-subtotal" style="font-weight:600; color:var(--color-text);"></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <span style="color:var(--color-text-soft);">Envío</span>
+            <span style="color:var(--color-text-soft); font-size:.9rem;">A coordinar</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <span style="font-size:1.15rem; font-weight:700; color:var(--color-text);">Total</span>
+            <span id="cart-total" style="font-size:1.25rem; font-weight:700; color:var(--color-primary);"></span>
+          </div>
+
+          <div class="d-flex gap-3 flex-wrap">
+            <button onclick="handleCheckout()" class="btn btn__sumbu flex-grow-1">
+              Confirmar compra
+            </button>
+            <button onclick="handleClearCart()" class="btn btn__sumbu__outline">
+              Vaciar carrito
+            </button>
+          </div>
+
+          <p style="font-size:.8rem; color:var(--color-text-soft); margin-top:1rem; text-align:center;">
+            Pago simulado — esto es una demo 😊
+          </p>
+        </div>
+
+      </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components/navbar.js"></script>
+    <script>
+      // Si no hay sesión, redirigir al login
+      document.addEventListener("DOMContentLoaded", function () {
+        if (!isLoggedIn()) {
+          window.location.href = "login.html";
+          return;
+        }
+        renderCart();
+      });
+
+      function formatPrice(n) {
+        return n.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 0 });
+      }
+
+      function renderCart() {
+        const cart = getCart();
+        const emptyEl   = document.getElementById("cart-empty");
+        const itemsEl   = document.getElementById("cart-items");
+        const summaryEl = document.getElementById("cart-summary");
+
+        if (cart.length === 0) {
+          emptyEl.style.display   = "block";
+          summaryEl.style.display = "none";
+          itemsEl.innerHTML       = "";
+          return;
+        }
+
+        emptyEl.style.display   = "none";
+        summaryEl.style.display = "block";
+
+        itemsEl.innerHTML = cart.map(function (item) {
+          return `
+            <div class="cart__item" id="cart-item-${item.id}">
+              <div class="cart__item__img">
+                <img src="../${item.image}" alt="${item.name}" />
+              </div>
+              <div class="cart__item__info">
+                <div class="cart__item__name">${item.name}</div>
+                <div class="cart__item__cat">${item.category}</div>
+              </div>
+              <div class="cart__item__controls">
+                <div class="quantity-control">
+                  <button class="quantity-btn" onclick="changeItemQty('${item.id}', -1)">−</button>
+                  <span class="quantity-display" id="cart-qty-${item.id}">${item.quantity}</span>
+                  <button class="quantity-btn" onclick="changeItemQty('${item.id}', +1)">+</button>
+                </div>
+                <div class="cart__item__price">${formatPrice(item.price * item.quantity)}</div>
+                <button class="cart__item__remove" onclick="removeItem('${item.id}')" aria-label="Eliminar">✕</button>
+              </div>
+            </div>`;
+        }).join("");
+
+        document.getElementById("cart-subtotal").textContent = formatPrice(getCartTotal());
+        document.getElementById("cart-total").textContent    = formatPrice(getCartTotal());
+      }
+
+      function changeItemQty(productId, delta) {
+        const cart = getCart();
+        const item = cart.find(function (i) { return i.id === productId; });
+        if (!item) return;
+        updateCartQty(productId, item.quantity + delta);
+        renderCart();
+      }
+
+      function removeItem(productId) {
+        removeFromCart(productId);
+        renderCart();
+      }
+
+      function handleClearCart() {
+        if (confirm("¿Vaciar el carrito?")) {
+          clearCart();
+          renderCart();
+        }
+      }
+
+      function handleCheckout() {
+        const session = getSession();
+        const total   = formatPrice(getCartTotal());
+        clearCart();
+        renderCart();
+        alert(
+          `✅ ¡Compra confirmada! (simulada)\n\n` +
+          `Usuario: ${session.email}\n` +
+          `Total: ${total}\n\n` +
+          `Nos contactaremos a la brevedad para coordinar el envío. 🍓`
+        );
+      }
+    </script>
+      <script src="../js/components/footer.js"></script>
+  </body>
+</html>
