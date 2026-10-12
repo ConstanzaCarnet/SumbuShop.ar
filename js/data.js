@@ -5,7 +5,7 @@ const NAV_PAGES = [
   { id: "jams", title: "Mermeladas", path: "pages/jams.html" },
   { id: "preserved", title: "Conservas", path: "pages/preserved.html" },
   { id: "backery", title: "Repostería", path: "pages/bakery.html" },
-  { id: "mache", title: "Maché", path: "pages/mache.html" },
+  { id: "mache", title: "Maché", path: "pages/mache-paper.html" },
   { id: "cosmetics", title: "Cosmética", path: "pages/cosmetics.html" },
 ];
 
@@ -172,7 +172,7 @@ const PRODUCTS = {
         "Arbolitos decorativos en papel maché. Disponibles en distintos colores y estilos.",
       price: 4200,
       images: [
-        "img/papelMache/arbolitoBlanco.jpeg",
+        "img/papelMache/arbolitoBlanco.png",
         "img/papelMache/arbolitoAzulMache.jpeg",
         "img/papelMache/arbolitosVerdesMache.png",
       ],

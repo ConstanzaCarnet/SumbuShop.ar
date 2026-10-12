@@ -1,5 +1,5 @@
 function renderFooter() {
-  const footer = document.createElement("footer-container");
+  const footer = document.getElementById("footer-container");
   if (!footer) {
     console.error("Footer container not found");
     return;

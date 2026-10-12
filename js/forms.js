@@ -63,8 +63,11 @@ if (registerForm) {
     clearFormError("registerForm");
 
     const nombre = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
+    const usuario = document.getElementById("usuario").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
+    const fechaNacimiento = document.getElementById("fechaNacimiento").value;
 
     // Validación mínima de contraseña
     if (password.length < 6) {
@@ -75,7 +78,14 @@ if (registerForm) {
       return;
     }
 
-    const result = registerUser(nombre, email, password);
+    const result = registerUser(
+      nombre,
+      apellido,
+      usuario,
+      email,
+      password,
+      fechaNacimiento,
+    );
     if (!result.ok) {
       showFormError("registerForm", result.error);
       return;

@@ -16,7 +16,7 @@ function saveCart(cart) {
 
 //Operaciones con el carrito
 //agregar un producto al carrito, si el producto ya existe, se incrementa la cantidad
-function addToCart(product, quantity = 1) {
+function addToCart(productId, quantity = 1) {
   //busco y veo si exite
   let product = null;
   for (const category of Object.values(PRODUCTS)) {
@@ -34,7 +34,8 @@ function addToCart(product, quantity = 1) {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
+      //los productos tienen un array de imágenes: en el carrito mostramos la primera
+      image: product.images[0],
       category: product.category,
       quantity: quantity,
     });

@@ -24,19 +24,25 @@ function findUser(email) {
 /**
  * Registra un nuevo usuario.
  * @param {string} nombre
+ * @param {string} apellido
+ * @param {string} usuario
  * @param {string} email
  * @param {string} password
+ * @param {string} fechaNacimiento - formato "AAAA-MM-DD" (valor del input type="date")
  * @returns {{ ok: boolean, error?: string }}
  */
-function registerUser(nombre, email, password) {
+function registerUser(nombre, apellido, usuario, email, password, fechaNacimiento) {
   if (findUser(email)) {
     return { ok: false, error: "Ya existe una cuenta con ese email." };
   }
   const users = getUsers();
   users.push({
     nombre: nombre.trim(),
+    apellido: apellido.trim(),
+    usuario: usuario.trim(),
     email: email.trim().toLowerCase(),
     password, // texto plano — solo para demostración
+    fechaNacimiento,
     createdAt: new Date().toISOString(),
   });
   localStorage.setItem(USERS_KEY, JSON.stringify(users));

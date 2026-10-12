@@ -4,7 +4,7 @@ function getBasePath() {
 }
 // con resolvePath, se resuelve la ruta de cada página del navbar para que funcione correctamente en todas las páginas del sitio, ya que algunas páginas están en la raíz y otras en la carpeta "pages"
 function resolvePath(rootPath) {
-  const basePath = getBasePath();
+  const base = getBasePath();
   if (base == "") {
     return rootPath;
   }
@@ -22,15 +22,13 @@ function getActiveClass(page) {
 
 function renderNavbar() {
   const container = document.getElementById("navbar-container");
-  if (!container) {
-    console.error("Navbar container not found");
-    return;
-  }
+  //login y register no tienen navbar a propósito, así que si no hay contenedor simplemente no lo renderizamos
+  if (!container) return;
   const base = getBasePath();
   const navLinks = NAV_PAGES.map(function (page) {
     return `
       <li class="nav-item">
-        <a class="nav-link${getActiveClass(page)}" href="${resolvePath(page.path)}">
+        <a class="nav-link ${getActiveClass(page)}" href="${resolvePath(page.path)}">
           ${page.title}
         </a>
       </li>`;
@@ -73,3 +71,6 @@ function logout() {
   window.location.href = getBasePath() + "pages/login.html";
 }
 //importante aclara que estas ultimas funciones se encuentran en cart.js y auth.js, y que se deben cargar antes de navbar.js para que funcionen correctamente
+
+//addEventListener para que cuando el DOM esté cargado, se ejecute la función renderNavbar
+document.addEventListener("DOMContentLoaded", renderNavbar);
