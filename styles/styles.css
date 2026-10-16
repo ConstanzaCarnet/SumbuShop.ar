@@ -235,6 +235,7 @@ a {
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.2s;
+  text-decoration: none; /* para cuando se usa como <a> ("Iniciar sesión") */
 }
 .btn-logout:hover {
   background-color: var(--color-primary);
@@ -971,6 +972,7 @@ a {
 }
 .cart__item__price {
   font-weight: 700;
+
   color: var(--color-primary);
   font-size: 0.95rem;
   min-width: 80px;

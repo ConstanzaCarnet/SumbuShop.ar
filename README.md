@@ -11,28 +11,42 @@ En resumen una página ecommerce para la promoción de productos variados.(tiend
 
 - HTML5
 - CSS3
-  -JavaScript (vanilla)
+- JavaScript (vanilla)
+- Bootstrap 5
+
+## Login y compra
+
+La tienda se puede recorrer sin iniciar sesión; el login se pide recién al intentar comprar (botón "Agregar" o carrito). La sesión se guarda en `localStorage`, y la página de origen en `sessionStorage` para volver a ella después del login. El navbar muestra "Iniciar sesión" o "Cerrar sesión" según el estado.
 
 ## Estructura del proyecto
 
 ```
 sumbu-shop.ar/
-├── index.html              ← Página de inicio
+├── index.html                  ← Página de inicio
 ├── README.md
+├── img/                        ← Imágenes de productos, organizadas por categoría
 ├── styles/
-│   ├── styles.css          ← Estilos globales
-|   └── forms.css           ← Estilos para formularios
+│   ├── styles.css              ← Estilos globales
+│   └── forms.css               ← Estilos para formularios
 ├── js/
-│   ├── forms.js            ← Lógica de formulario(manejo de submit)
-|   ├── theme.js            ← Lógica de theme(dark or ligth)
-│   └── navbar.js           ← Lógica del navbar(logout + link activo)
+│   ├── data.js                 ← Datos: páginas del navbar (NAV_PAGES) y productos (PRODUCTS)
+│   ├── auth.js                 ← Registro, login, logout y sesión (localStorage)
+│   ├── cart.js                 ← Lógica del carrito (localStorage)
+│   ├── forms.js                ← Submit de login/registro y redirección
+│   ├── theme.js                ← Tema claro/oscuro
+│   └── components/
+│       ├── navbar.js           ← Componente navbar (links, link activo, login/logout)
+│       ├── footer.js           ← Componente footer
+│       ├── productCard.js      ← Componente card de producto (cantidad + agregar al carrito)
+│       └── productModal.js     ← Modal de detalle de producto con carrusel
 └── pages/
-    ├── login.html          ← Inicio de sesión
-    ├── register.html       ← Registro de usuario
-    ├── about-us.html ← Descripción del negocio
-    ├── jams.html     ← Categoría: Mermeladas
-    ├── preserved.html      ← Categoría: Conservas
-    ├── bakery.html      ← Categoría: Pastelería
-    ├── mache-paper.html    ← Categoría: Papel Maché
-    └── cosmetic.html      ← Categoría: Cosmética Natural
+    ├── login.html              ← Inicio de sesión
+    ├── register.html           ← Registro de usuario
+    ├── about-us.html           ← Descripción del negocio
+    ├── jams.html               ← Categoría: Mermeladas
+    ├── preserved.html          ← Categoría: Conservas
+    ├── bakery.html             ← Categoría: Pastelería
+    ├── mache-paper.html        ← Categoría: Papel Maché
+    ├── cosmetics.html          ← Categoría: Cosmética Natural
+    └── cart.html               ← Carrito de compras (requiere sesión)
 ```

@@ -36,6 +36,11 @@ function renderNavbar() {
   //deterninar las rutas del carrito según la ubicación de la página actual, para que funcione correctamente en todas las páginas del sitio
   const cartPath = base + "pages/cart.html";
   const loginPath = base + "pages/login.html";
+  //si hay sesión mostramos "Cerrar sesión", si no, "Iniciar sesión"
+  const loggedIn = typeof isLoggedIn === "function" && isLoggedIn();
+  const authButton = loggedIn
+    ? `<button class="btn-logout" onclick="logout()">Cerrar sesión</button>`
+    : `<a href="${loginPath}" class="btn-logout" onclick="goToLogin()">Iniciar sesión</a>`;
   //agregamos el contenido del navbar al contenedor, incluyendo los links y los botones de carrito y cerrar sesión
   container.innerHTML = `
     <nav class="navbar navbar-expand-lg sticky-top">
@@ -56,7 +61,7 @@ function renderNavbar() {
               🛒
               <span id="cartBadge" class="cart__badge" style="display:none;">0</span>
             </a>
-            <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
+            ${authButton}
           </div>
         </div>
       </div>
@@ -69,6 +74,10 @@ function logout() {
   if (typeof logoutUser === "function") logoutUser();
   if (typeof clearCart === "function") clearCart();
   window.location.href = getBasePath() + "pages/login.html";
+}
+//guardamos la página actual para que, después de loguearse, vuelva acá y no al inicio
+function goToLogin() {
+  sessionStorage.setItem("sumbu-redirect", window.location.href);
 }
 //importante aclara que estas ultimas funciones se encuentran en cart.js y auth.js, y que se deben cargar antes de navbar.js para que funcionen correctamente
 
