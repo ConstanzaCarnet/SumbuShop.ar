@@ -4,7 +4,7 @@ const NAV_PAGES = [
   { id: "about", title: "Sobre Nosotros", path: "pages/about-us.html" },
   { id: "jams", title: "Mermeladas", path: "pages/jams.html" },
   { id: "preserved", title: "Conservas", path: "pages/preserved.html" },
-  { id: "backery", title: "Repostería", path: "pages/bakery.html" },
+  { id: "bakery", title: "Repostería", path: "pages/bakery.html" },
   { id: "mache", title: "Maché", path: "pages/mache-paper.html" },
   { id: "cosmetics", title: "Cosmética", path: "pages/cosmetics.html" },
 ];

@@ -60,10 +60,10 @@ function createProductCard(product) {
 }
 
 //renderizo los contenedores
-function renderProductCards(conteinerId, products) {
-  const container = document.getElementById(conteinerId);
+function renderProductCards(containerId, products) {
+  const container = document.getElementById(containerId);
   if (!container)
-    return console.error(`Contenedor con id ${conteinerId} no encontrado`);
+    return console.error(`Contenedor con id ${containerId} no encontrado`);
 
   if (!products || products.length === 0) {
     container.innerHTML = `
@@ -110,7 +110,7 @@ function showToast(message) {
   }
   toast.textContent = message;
   toast.classList.add("sumbu__toast--visible");
-  //le doy 2.5 miliseguntos
+  //le doy 2.5 segundos (2500 milisegundos)
   setTimeout(function () {
     toast.classList.remove("sumbu__toast--visible");
   }, 2500);
