@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SumbuShop.ar - Resultados de búsqueda</title>
+    <link rel="icon" type="image/png" href="../img/sumbu-shop.ar.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="../js/theme.js" defer></script>
+  </head>
+
+  <body>
+    <!--Navbar-->
+    <div id="navbar-container"></div>
+
+    <!-- Contenido de la página de resultados -->
+    <main class="page__content">
+      <div class="header__search">
+        <div class="container">
+          <p class="section__eyebrow">Sumbu Shop</p>
+          <h1
+            class="section__title"
+            id="searchResultsTitle"
+            style="font-size: 2.4rem"
+          ></h1>
+        </div>
+      </div>
+
+      <!--Grilla o cards de productos-->
+      <section class="py__section bg__cream">
+        <div class="container">
+          <div class="row g-4" id="search-results">
+            <!-- Las cards se generan con JS -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+
+    <div id="footer-container"></div>
+
+    <!-- Contenedor del modal de producto (generado por JS) -->
+    <div id="modal-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/data.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/components/navbar.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/components/productCard.js"></script>
+    <script src="../js/components/productModal.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", renderSearchPage);
+    </script>
+    <script src="../js/components/footer.js"></script>
+  </body>
+</html>

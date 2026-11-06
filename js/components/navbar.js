@@ -55,6 +55,23 @@ function renderNavbar() {
           <ul class="navbar-nav mx-auto gap-1">
             ${navLinks}
           </ul>
+
+          <!-- Buscador -->
+          <div class="search__wrap me-auto">
+            <div class="search__input-wrap">
+              <span class="search__icon" aria-hidden="true">🔍</span>
+              <input
+                type="search"
+                id="searchInput"
+                class="search__input"
+                placeholder="Buscar productos..."
+                autocomplete="off"
+                aria-label="Buscar productos"
+              />
+            </div>
+            <ul id="searchDropdown" class="search__dropdown" role="listbox" aria-label="Resultados de búsqueda"></ul>
+          </div>
+
           <div class="d-flex align-items-center gap-2">
             <button id="themeToggle" class="btn__theme" onclick="toggleTheme()" aria-label="Cambiar tema">🌙</button>
             <a href="${cartPath}" class="cart__btn" aria-label="Ver carrito">
@@ -66,6 +83,11 @@ function renderNavbar() {
         </div>
       </div>
     </nav>`;
+
+  //inicializamos el buscador de productos, que depende de los elementos del DOM que se crean en el navbar
+  if (typeof initSearch === "function") initSearch();
+  //badge del carrito
+  setTimeout(updateCartBadge, 50); //esperamos un poco para que se renderice el navbar y luego actualizamos el badge del carrito
 }
 
 //Logout, borramos la sesion y redirigimos al login
