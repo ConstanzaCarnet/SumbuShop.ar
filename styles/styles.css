@@ -1347,62 +1347,99 @@ a {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* ─── 15. Opiniones (carrusel del index, lo arma js/reviews.js) ─── */
+/* ─── 15. Opiniones (carrusel al final del index, lo arma js/reviews.js) ─── */
 .reviews__section {
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  padding: 3rem 0 3.5rem;
+  background: var(--color-bg);
 }
 
-/* resumen: "4,8 ★★★★★ 8 opiniones" */
+/* título a la izquierda y resumen de estrellas a la derecha (en celular, uno debajo del otro) */
+.reviews__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.reviews__heading .section__title {
+  margin-bottom: 0;
+}
 .reviews__summary {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 .reviews__score {
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--color-text);
+  line-height: 1;
 }
 .reviews__count {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--color-text-soft);
 }
 
 /* carrusel: espacio a los costados para las flechas y abajo para los puntitos */
 .reviews__carousel {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 3.5rem 2.5rem;
+  padding: 0 3.25rem 2.25rem;
+}
+
+/* cada slide es una fila de 1, 2 o 3 tarjetas (--per-slide lo define reviews.js);
+   si el último slide tiene menos tarjetas, quedan centradas */
+.reviews__group {
+  --gap: 1.25rem;
+  display: flex;
+  justify-content: center;
+  gap: var(--gap);
+  padding: 0.5rem 0.25rem; /* aire para que no se corte la sombra */
+}
+.reviews__group .review__card {
+  flex: 0 0 calc((100% - (var(--per-slide) - 1) * var(--gap)) / var(--per-slide));
 }
 
 /* tarjeta de cada opinión, al estilo de una reseña de Google */
 .review__card {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 1.75rem 2rem;
-  min-height: 260px;
+  position: relative;
   display: flex;
   flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 10px rgba(58, 37, 24, 0.06);
+  padding: 1.4rem 1.5rem 1.25rem;
+  overflow: hidden;
 }
+/* comilla decorativa grande en la esquina */
+.review__card::after {
+  content: "”";
+  position: absolute;
+  top: -0.4rem;
+  right: 1rem;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
 .review__header {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 .review__avatar {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
   border-radius: var(--radius-pill);
   background: var(--color-primary);
   color: #fff;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1419,26 +1456,30 @@ a {
   line-height: 1.2;
 }
 .review__meta {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--color-text-soft);
 }
 .review__stars {
   color: #f4b400; /* el amarillo de las estrellas de Google */
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: 2px;
 }
+/* el comentario ocupa el espacio libre: así todas las tarjetas de una fila miden lo mismo */
 .review__comment {
   flex: 1;
   color: var(--color-text);
-  font-size: 1rem;
-  line-height: 1.7;
-  margin: 0.5rem 0 1rem;
+  font-size: 0.93rem;
+  line-height: 1.65;
+  margin: 0.5rem 0 0.9rem;
 }
 .review__product {
   align-self: flex-start;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-primary);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+  width: 100%;
 }
 .review__product:hover {
   text-decoration: underline;
@@ -1447,12 +1488,13 @@ a {
 /* flechas: círculos con contorno, como los botones del navbar */
 .reviews__carousel .carousel-control-prev,
 .reviews__carousel .carousel-control-next {
-  top: calc(50% - 1.25rem - 20px); /* centradas respecto de la tarjeta (sin contar los puntitos) */
+  top: calc(50% - 1.125rem - 20px); /* centradas respecto de las tarjetas (sin contar los puntitos) */
   bottom: auto;
   width: 40px;
   height: 40px;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
   opacity: 1;
   transition:
     border-color 0.2s,
@@ -1461,7 +1503,6 @@ a {
 .reviews__carousel .carousel-control-prev:hover,
 .reviews__carousel .carousel-control-next:hover {
   border-color: var(--color-primary);
-  background-color: rgba(192, 74, 42, 0.08);
 }
 .reviews__carousel .carousel-control-prev-icon,
 .reviews__carousel .carousel-control-next-icon {
@@ -1473,16 +1514,12 @@ a {
 [data-theme="dark"] .reviews__carousel .carousel-control-next-icon {
   filter: none;
 }
-[data-theme="dark"] .reviews__carousel .carousel-control-prev,
-[data-theme="dark"] .reviews__carousel .carousel-control-next {
+[data-theme="dark"] .reviews__carousel .carousel-control-prev:not(:hover),
+[data-theme="dark"] .reviews__carousel .carousel-control-next:not(:hover) {
   border-color: #4d372a; /* mismo borde que los botones del navbar en oscuro */
 }
-[data-theme="dark"] .reviews__carousel .carousel-control-prev:hover,
-[data-theme="dark"] .reviews__carousel .carousel-control-next:hover {
-  border-color: var(--color-primary);
-}
 
-/* puntitos debajo de la tarjeta */
+/* puntitos debajo de las tarjetas */
 .reviews__carousel .carousel-indicators {
   margin-bottom: 0;
 }
@@ -1496,21 +1533,17 @@ a {
 
 @media (max-width: 575.98px) {
   .reviews__carousel {
-    padding: 0 0 2.5rem;
+    padding: 0 0 2.25rem;
   }
   .reviews__carousel .carousel-control-prev,
   .reviews__carousel .carousel-control-next {
     display: none; /* en celular se pasa deslizando o con los puntitos */
   }
-  .review__card {
-    padding: 1.5rem 1.25rem;
-    min-height: 300px;
-  }
 }
 
 /* aviso cuando no se pueden cargar las opiniones (por ejemplo, abriendo el index.html con doble click) */
 .reviews__error {
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 1rem 1.25rem;
   text-align: center;
@@ -1518,4 +1551,9 @@ a {
   color: var(--color-text-soft);
   border: 1px dashed var(--color-border);
   border-radius: var(--radius-md);
+}
+.reviews__error a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
 }

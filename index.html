@@ -221,45 +221,6 @@
         </div>
       </section>
 
-      <!--OPINIONES: las genera js/reviews.js con fetch a data/reviews.json (necesita servidor: Live Server o Vercel)-->
-      <section class="py__section reviews__section" id="reviews-section" hidden>
-        <div class="container">
-          <div class="text-center mb-4">
-            <p class="section__eyebrow">Lo que dicen nuestros clientes</p>
-            <h2 class="section__title">Opiniones</h2>
-            <div class="reviews__summary" id="reviews-summary"></div>
-          </div>
-          <div id="reviewsCarousel" class="carousel slide reviews__carousel">
-            <div class="carousel-inner"></div>
-            <div class="carousel-indicators"></div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#reviewsCarousel"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Anterior</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#reviewsCarousel"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Siguiente</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
       <!--Sobre nosotros-->
       <section class="py__section bg__cream">
         <div class="container">
@@ -293,6 +254,43 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <!--OPINIONES: las genera js/reviews.js con fetch a data/reviews.json (necesita servidor: Live Server o Vercel)-->
+      <section class="py__section reviews__section" id="reviews-section" hidden>
+        <div class="container">
+          <div class="reviews__heading">
+            <h2 class="section__title">Lo que opinan nuestros clientes</h2>
+            <div class="reviews__summary" id="reviews-summary"></div>
+          </div>
+          <div id="reviewsCarousel" class="carousel slide reviews__carousel">
+            <div class="carousel-inner"></div>
+            <div class="carousel-indicators"></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#reviewsCarousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#reviewsCarousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
           </div>
         </div>
       </section>
