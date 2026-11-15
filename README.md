@@ -43,7 +43,7 @@ sumbu-shop.ar/
 │   ├── data.js                 ← Datos (NAV_PAGES, PRODUCTS) y helpers: findProductById, formatPrice...
 │   ├── auth.js                 ← Registro, login, logout, sesión y volver a la página de origen
 │   ├── cart.js                 ← Lógica del carrito (localStorage)
-│   ├── search.js               ← Buscador del navbar y página de resultados
+│   ├── search.js               ← Buscador del navbar y armado de la página products.html
 │   ├── reviews.js              ← Carrusel de opiniones del index (fetch a data/reviews.json)
 │   ├── forms.js                ← Submit de login/registro y redirección
 │   ├── theme.js                ← Tema claro/oscuro (se carga en el <head>)
@@ -62,6 +62,6 @@ sumbu-shop.ar/
     ├── bakery.html             ← Categoría: Pastelería
     ├── mache-paper.html        ← Categoría: Papel Maché
     ├── cosmetics.html          ← Categoría: Cosmética Natural
-    ├── search.html             ← Resultados del buscador (?q=...)
+    ├── products.html           ← Catálogo: todos los productos o resultados del buscador (?q=...), con "Ver más"
     └── cart.html               ← Carrito de compras (requiere sesión)
 ```

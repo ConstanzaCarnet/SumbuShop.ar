@@ -179,7 +179,7 @@ function initSearch() {
 
     e.preventDefault();
     hideDropdown();
-    goTo(basePath + "pages/search.html?q=" + encodeURIComponent(query));
+    goTo(basePath + "pages/products.html?q=" + encodeURIComponent(query));
   });
 
   //click en un resultado del dropdown
@@ -232,35 +232,50 @@ function handleSearchDirect() {
 document.addEventListener("DOMContentLoaded", handleSearchDirect);
 
 /**
- * Pinta la página de resultados (pages/search.html) a partir del ?q= de la URL
+ * Pinta pages/products.html, que tiene dos modos según la URL:
+ * - products.html         → todos los productos (botón "Explorar productos" del index)
+ * - products.html?q=tarta → resultados de la búsqueda (Enter en el buscador)
+ * En los dos casos las cards se muestran de a tandas con el botón "Ver más".
  * Usamos textContent para el título porque el texto viene de la URL y no debe interpretarse como HTML
  */
-function renderSearchPage() {
-  const title = document.getElementById("searchResultsTitle");
-  const query = (
-    new URLSearchParams(window.location.search).get("q") || ""
-  ).trim();
+function renderProductsPage() {
+  const title = document.getElementById("productsTitle");
+  const intro = document.getElementById("productsIntro");
+  const loadMore = document.getElementById("load-more");
+  const query = new URLSearchParams(window.location.search).get("q");
 
-  //dejamos la búsqueda escrita en el navbar para poder corregirla
-  const input = document.getElementById("searchInput");
-  if (input) input.value = query;
-
-  if (query.length < 2) {
-    title.textContent = "Escribí al menos 2 letras para buscar";
+  //sin ?q= → catálogo completo (el título y la intro ya están en el HTML)
+  if (query === null) {
+    renderProductsWithLoadMore("products-container", "load-more", getAllProducts());
     return;
   }
 
-  const results = searchProducts(query, Infinity);
+  //modo búsqueda
+  const text = query.trim();
+  intro.hidden = true;
+  document.title = `SumbuShop.ar - Búsqueda: ${text}`;
+  //dejamos la búsqueda escrita en el navbar para poder corregirla
+  document.getElementById("searchInput").value = text;
+
+  if (text.length < 2) {
+    title.textContent = "Escribí al menos 2 letras para buscar";
+    loadMore.hidden = true;
+    return;
+  }
+
+  const results = searchProducts(text, Infinity);
   if (results.length === 0) {
-    title.textContent = `No encontramos productos para "${query}"`;
-    document.getElementById("search-results").innerHTML = `
+    title.textContent = `No encontramos productos para "${text}"`;
+    loadMore.hidden = true;
+    document.getElementById("products-container").innerHTML = `
       <div class="col-12 text-center py-5">
-        <p class="text-muted">Probá con otra palabra o revisá las categorías.</p>
+        <p class="text-muted mb-3">Probá con otra palabra o mirá todo el catálogo.</p>
+        <a href="products.html" class="btn btn__sumbu__outline">Ver todos los productos</a>
       </div>`;
     return;
   }
 
   const label = results.length === 1 ? "resultado" : "resultados";
-  title.textContent = `${results.length} ${label} para "${query}"`;
-  renderProductCards("search-results", results);
+  title.textContent = `${results.length} ${label} para "${text}"`;
+  renderProductsWithLoadMore("products-container", "load-more", results);
 }

@@ -67,6 +67,33 @@ function renderProductCards(containerId, products) {
 
   container.innerHTML = products.map(createProductCard).join("");
 }
+/**
+ * Muestra las cards de a tandas, con un botón "Ver más" que agrega la tanda siguiente.
+ * Reutiliza createProductCard (las mismas cards que en las categorías).
+ * @param {string} containerId - id de la grilla (.row) donde van las cards
+ * @param {string} buttonId - id del botón "Ver más"
+ * @param {Array} products - productos a mostrar
+ * @param {number} pageSize - cuántos se muestran por tanda
+ */
+function renderProductsWithLoadMore(containerId, buttonId, products, pageSize = 9) {
+  const container = document.getElementById(containerId);
+  const button = document.getElementById(buttonId);
+  let shown = 0;
+
+  function showMore() {
+    const next = products.slice(shown, shown + pageSize);
+    //insertAdjacentHTML agrega al final sin borrar las cards que ya estaban
+    container.insertAdjacentHTML("beforeend", next.map(createProductCard).join(""));
+    shown += next.length;
+    //cuando ya se mostraron todos, el botón desaparece
+    button.hidden = shown >= products.length;
+  }
+
+  container.innerHTML = "";
+  button.addEventListener("click", showMore);
+  showMore();
+}
+
 //contenedor de cantidad por producto
 const quantities = {};
 function changeQty(productId, delta) {

@@ -291,6 +291,23 @@ function findProductById(productId) {
 }
 
 /**
+ * Todos los productos en una sola lista, intercalando categorías (una mermelada, una conserva,
+ * una de pastelería...) para que desde el principio se vea variedad y no solo la primera categoría.
+ * @returns {Array}
+ */
+function getAllProducts() {
+  const categories = Object.values(PRODUCTS);
+  const longest = Math.max(...categories.map((products) => products.length));
+  const all = [];
+  for (let i = 0; i < longest; i++) {
+    for (const products of categories) {
+      if (products[i]) all.push(products[i]);
+    }
+  }
+  return all;
+}
+
+/**
  * Ruta (desde la raíz) de la página de categoría de un producto.
  * Las claves de PRODUCTS (jams, preserved...) son las mismas que los id de NAV_PAGES.
  * @param {string} productId
