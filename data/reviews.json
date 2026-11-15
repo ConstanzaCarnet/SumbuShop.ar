@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "name": "Valentina R.",
+    "location": "Córdoba",
+    "product": "Mermelada de Frutilla",
+    "productId": "jam-001",
+    "category": "Mermeladas",
+    "stars": 5,
+    "comment": "La mermelada de frutilla es una delicia. Se nota que está hecha con frutas frescas, nada que ver con las industriales. Ya pedí dos frascos más para regalar.",
+    "date": "2024-10-14"
+  },
+  {
+    "id": 2,
+    "name": "Martín G.",
+    "location": "Buenos Aires",
+    "product": "Lemon Pie",
+    "productId": "bak-004",
+    "category": "Pastelería",
+    "stars": 5,
+    "comment": "El Lemon Pie llegó en perfecto estado y el sabor era exquisito, muy equilibrado. Volvería a pedir sin dudarlo.",
+    "date": "2024-10-28"
+  },
+  {
+    "id": 3,
+    "name": "Luciana M.",
+    "location": "Rosario",
+    "product": "Aceite de Lavanda",
+    "productId": "cos-001",
+    "category": "Cosmética",
+    "stars": 5,
+    "comment": "El aceite de lavanda es puro y de muy buena calidad. Lo uso para aromaterapia antes de dormir y la diferencia es notable. Muy contenta con la compra.",
+    "date": "2024-11-03"
+  },
+  {
+    "id": 4,
+    "name": "Federico A.",
+    "location": "Mendoza",
+    "product": "Pollo en Escabeche",
+    "productId": "pres-002",
+    "category": "Conservas",
+    "stars": 4,
+    "comment": "El escabeche de pollo tiene un sabor casero que hace tiempo no encontraba. Lo recomiendo para reuniones familiares.",
+    "date": "2024-10-19"
+  },
+  {
+    "id": 5,
+    "name": "Camila T.",
+    "location": "Córdoba",
+    "product": "Hadas y Muñecas",
+    "productId": "mache-006",
+    "category": "Papel Maché",
+    "stars": 5,
+    "comment": "Compré las hadas de papel maché como regalo de cumpleaños y fueron un éxito total. Los colores son vibrantes y la calidad artesanal se nota en cada detalle. Una obra de arte.",
+    "date": "2024-11-07"
+  },
+  {
+    "id": 6,
+    "name": "Sofía B.",
+    "location": "Santa Fe",
+    "product": "Tarta de Coco y Dulce de Leche",
+    "productId": "bak-003",
+    "category": "Pastelería",
+    "stars": 5,
+    "comment": "La tarta de coco con dulce de leche es absolutamente irresistible. La masa es bien crocante y el relleno cremoso, delicioso.",
+    "date": "2024-10-31"
+  },
+  {
+    "id": 7,
+    "name": "Ignacio P.",
+    "location": "Tucumán",
+    "product": "Botella y Jarrón Decorado",
+    "productId": "mache-003",
+    "category": "Papel Maché",
+    "stars": 4,
+    "comment": "El jarrón decorado es hermoso y único. Se nota el trabajo manual en cada pincelada. Lo puse en el living y es el primero que llama la atención cuando llegan visitas.",
+    "date": "2024-11-01"
+  },
+  {
+    "id": 8,
+    "name": "Agustina L.",
+    "location": "Córdoba",
+    "product": "Crema de Manzanilla",
+    "productId": "cos-004",
+    "category": "Cosmética",
+    "stars": 5,
+    "comment": "Tengo la piel súper sensible y esta crema de manzanilla es lo mejor que probé. Nada de irritaciones ni reacciones. La textura es perfecta y dura mucho. ¡La recomiendo a ojos cerrados!",
+    "date": "2024-11-10"
+  }
+]

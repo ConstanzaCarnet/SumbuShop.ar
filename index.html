@@ -2,8 +2,6 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <!--compatibilidad de navegadores-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SumbuShop.ar</title>
     <link rel="icon" type="image/png" href="img/sumbu-shop.ar.png" />
@@ -18,12 +16,15 @@
       rel="stylesheet"
     />
     <!--Estilos personalizados propioos-->
-    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
     <!--Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <!--el tema va en el head para aplicarlo antes de que se pinte la página-->
+    <script src="js/theme.js"></script>
   </head>
 
   <body>
@@ -189,7 +190,7 @@
                   />
                 </div>
                 <div class="cat__body">
-                  <div class="cat__name">Cosméticos</div>
+                  <div class="cat__name">Cosmética</div>
                   <div class="cat__desc">
                     Cremas, aceites, serums, fragancias y más.
                   </div>
@@ -220,6 +221,45 @@
         </div>
       </section>
 
+      <!--OPINIONES: las genera js/reviews.js con fetch a data/reviews.json (necesita servidor: Live Server o Vercel)-->
+      <section class="py__section reviews__section" id="reviews-section" hidden>
+        <div class="container">
+          <div class="text-center mb-4">
+            <p class="section__eyebrow">Lo que dicen nuestros clientes</p>
+            <h2 class="section__title">Opiniones</h2>
+            <div class="reviews__summary" id="reviews-summary"></div>
+          </div>
+          <div id="reviewsCarousel" class="carousel slide reviews__carousel">
+            <div class="carousel-inner"></div>
+            <div class="carousel-indicators"></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#reviewsCarousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#reviewsCarousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <!--Sobre nosotros-->
       <section class="py__section bg__cream">
         <div class="container">
@@ -241,11 +281,7 @@
                 <div>
                   <a
                     href="pages/about-us.html"
-                    class="btn btn-outline-primary"
-                    style="
-                      border-color: rgba(255, 255, 255, 0.5) !important;
-                      color: #fff !important;
-                    "
+                    class="btn btn-outline-primary about__btn"
                   >
                     Conocer más →
                   </a>
@@ -266,12 +302,12 @@
     <div id="footer-container"></div>
     <!--Script-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/theme.js"></script>
     <script src="js/data.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/components/navbar.js"></script>
-    <script src="js/components/footer.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/reviews.js"></script>
+    <script src="js/components/footer.js"></script>
   </body>
 </html>

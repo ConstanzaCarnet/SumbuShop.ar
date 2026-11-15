@@ -46,13 +46,9 @@ if (loginForm) {
       return;
     }
 
-    // Credenciales correctas → crear sesión
+    // Credenciales correctas → crear sesión y volver a la página de origen
     loginUser(result.user);
-
-    // Volver a la página de origen si venía redirigido
-    const redirect = sessionStorage.getItem("sumbu-redirect");
-    sessionStorage.removeItem("sumbu-redirect");
-    window.location.href = redirect || "../index.html";
+    window.location.href = popRedirect();
   });
 }
 
@@ -91,12 +87,8 @@ if (registerForm) {
       return;
     }
 
-    // Registro exitoso → loguear automáticamente y redirigir
-    const user = findUser(email);
-    loginUser(user);
-
-    const redirect = sessionStorage.getItem("sumbu-redirect");
-    sessionStorage.removeItem("sumbu-redirect");
-    window.location.href = redirect || "../index.html";
+    // Registro exitoso → loguear automáticamente y volver a la página de origen
+    loginUser(result.user);
+    window.location.href = popRedirect();
   });
 }

@@ -78,20 +78,14 @@
     <script src="../js/components/navbar.js"></script>
     <script src="../js/search.js"></script>
     <script>
-      // Si no hay sesión, redirigir al login
+      // Si no hay sesión, redirigir al login (y volver al carrito después)
       document.addEventListener("DOMContentLoaded", function () {
         if (!isLoggedIn()) {
-          //guardamos el carrito como destino para volver acá después del login
-          sessionStorage.setItem("sumbu-redirect", window.location.href);
-          window.location.href = "login.html";
+          redirectToLogin();
           return;
         }
         renderCart();
       });
-
-      function formatPrice(n) {
-        return n.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 0 });
-      }
 
       function renderCart() {
         const cart = getCart();
@@ -113,7 +107,7 @@
           return `
             <div class="cart__item" id="cart-item-${item.id}">
               <div class="cart__item__img">
-                <img src="../${item.image}" alt="${item.name}" />
+                <img src="${getBasePath()}${item.image}" alt="${item.name}" />
               </div>
               <div class="cart__item__info">
                 <div class="cart__item__name">${item.name}</div>
@@ -131,8 +125,9 @@
             </div>`;
         }).join("");
 
-        document.getElementById("cart-subtotal").textContent = formatPrice(getCartTotal());
-        document.getElementById("cart-total").textContent    = formatPrice(getCartTotal());
+        const total = formatPrice(getCartTotal());
+        document.getElementById("cart-subtotal").textContent = total;
+        document.getElementById("cart-total").textContent    = total;
       }
 
       function changeItemQty(productId, delta) {
@@ -168,6 +163,6 @@
         );
       }
     </script>
-      <script src="../js/components/footer.js"></script>
+    <script src="../js/components/footer.js"></script>
   </body>
 </html>

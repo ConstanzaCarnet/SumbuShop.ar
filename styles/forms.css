@@ -71,13 +71,6 @@
   color: #b0a89e;
 }
 
-/* Fila doble — nombre + apellido */
-.form__row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
 /* Botón submit */
 .btn__submit {
   width: 100%;

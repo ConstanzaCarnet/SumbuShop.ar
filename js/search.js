@@ -1,15 +1,5 @@
 //buscador de productos
 
-//mapeao de categorias  -> pagide categoria
-//con esto podemos ir a la página de categoría correspondiente al hacer click en un resultado del dropdown
-const CATEGORY_PAGES = {
-  Mermeladas: "pages/jams.html",
-  Conservas: "pages/preserved.html",
-  "Papel Maché": "pages/mache-paper.html",
-  Pastelería: "pages/bakery.html",
-  Cosmética: "pages/cosmetics.html",
-};
-
 /**
  * Pasamos el texto a minúsculas y le quitamos los acentos, para que "pasteleria" encuentre "Pastelería"
  * @param {string} text - El texto a normalizar
@@ -32,7 +22,7 @@ function searchProducts(query, limit = 10) {
   const results = [];
   const q = normalizeText(query.trim());
   if (q.length < 2) return results;
-  //object.values(PRODUCTS) devuelve un array con los arrays de productos de cada categoría, luego hacemos un for of para recorrer cada array de productos y otro for of para recorrer cada producto individualmente
+  //Object.values(PRODUCTS) devuelve un array con los arrays de productos de cada categoría; recorremos cada uno
   for (const products of Object.values(PRODUCTS)) {
     for (const product of products) {
       const stack = normalizeText(
@@ -49,58 +39,38 @@ function searchProducts(query, limit = 10) {
 }
 
 /**
- * generamos el HTML de los resultados de búsqueda y lo insertamos en el dropdown
- * @param {Object} results - Array de objetos con los resultados de la búsqueda
- * @param {string} basePath - Ruta base del sitio
+ * Generamos el HTML de un resultado del dropdown
+ * @param {Object} product - Producto encontrado
+ * @param {string} basePath - Raíz del sitio (getBasePath())
  */
-function builderResultItem(product, basePath) {
-  //si el producto tiene imagen, la usamos, si no, mostramos un placeholder
-  const thumb =
-    product.images && product.images.length > 0 ? product.images[0] : "";
-  const price = product.price.toLocaleString("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-  });
+function buildResultItem(product, basePath) {
   return `
-        <li class="search__result-item" data-product-id="${product.id}" data-category="${product.category}">
-      ${
-        thumb
-          ? `<img src="${basePath}${thumb}" alt="${product.name}" class="search__result-img" />`
-          : `<div class="search__result-img" style="background:var(--color-bg-alt,#f7f3ef);"></div>`
-      }
+    <li class="search__result-item" data-product-id="${product.id}">
+      <img src="${basePath}${product.images[0]}" alt="${product.name}" class="search__result-img" />
       <div class="search__result-info">
         <span class="search__result-name">${product.name}</span>
-        <span class="search__result-meta">${product.category} · ${price}</span>
+        <span class="search__result-meta">${product.category} · ${formatPrice(product.price)}</span>
       </div>
     </li>`;
 }
 
 /**
- * Inicializamos el buscador de productos, agregando los event listeners necesarios
- * lo inicializamos ya que depende de los elementos del DOM que se crean en el navbar, por eso se llama desde renderNavbar()
- * Debe llamarse después de renderizar el navbar, ya que depende de los elementos del DOM que se crean allí
+ * Inicializamos el buscador de productos, agregando los event listeners necesarios.
+ * Se llama desde renderNavbar(), porque depende de los elementos del DOM que se crean ahí.
  */
-
 function initSearch() {
   const input = document.getElementById("searchInput");
   const dropdown = document.getElementById("searchDropdown");
-  if (!input || !dropdown) return;
-
+  const wrap = document.getElementById("searchWrap");
+  const toggle = document.getElementById("searchToggle");
+  const back = document.getElementById("searchBack");
+  const nav = wrap.closest(".navbar");
+  const quickBar = nav.querySelector(".navbar__quick");
+  const navLinks = nav.querySelector(".navbar-nav");
   const basePath = getBasePath();
-  //detectar si estamos en una pagina de cateforia
-  function getCurrentPage() {
-    return window.location.pathname.split("/").pop() || "index.html"; //con esto decimos si no hay nada en la ruta, es decir, estamos en la home, devolvemos index.html y si hay algo, devolvemos el nombre del archivo de la ruta actual
-  }
-  //paginas donde el modal puede abrirse directamente (categorias y resultados de busqueda)
-  const CATEGORY_FILES = {
-    "search.html": true,
-    "jams.html": true,
-    "preserved.html": true,
-    "bakery.html": true,
-    "mache-paper.html": true,
-    "cosmetics.html": true,
-  };
+
+  //las páginas que tienen #modal-container (categorías y resultados) pueden abrir el detalle del producto ahí mismo
+  const canOpenModalHere = Boolean(document.getElementById("modal-container"));
 
   //renderizamos el dropdown con los resultados de búsqueda
   function renderDropdown(results) {
@@ -108,10 +78,9 @@ function initSearch() {
       dropdown.innerHTML = `<li class="search__no-results">No se encontraron resultados</li>`;
     } else {
       dropdown.innerHTML = results
-        .map((p) => builderResultItem(p, basePath))
+        .map((p) => buildResultItem(p, basePath))
         .join("");
     }
-    //agregamos la clase para mostrar el dropdown
     dropdown.classList.add("search__dropdown--open");
   }
 
@@ -119,6 +88,79 @@ function initSearch() {
     dropdown.classList.remove("search__dropdown--open");
     dropdown.innerHTML = "";
   }
+
+  /* ─── Buscador compacto (lupa) ───
+   * Hasta 1399px el buscador se muestra solo como lupa (SEARCH_COMPACT_QUERY, en navbar.js):
+   * - hasta 1199px (menú hamburguesa) la lupa va en la barra superior y al abrirse ocupa toda la barra
+   * - entre 1200px y 1399px queda al lado de los links y al abrirse ocupa el lugar de los links
+   * Se cierra con la flecha ←, con Escape, tocando afuera o con el botón "atrás" del celular/navegador.
+   */
+  function isExpanded() {
+    return wrap.classList.contains("search__wrap--expanded");
+  }
+
+  //mueve el buscador a la barra superior, antes del carrito (móvil) o al menú junto a los links (escritorio)
+  function placeSearch() {
+    closeCompactSearch();
+    if (NAVBAR_MOBILE_QUERY.matches) {
+      quickBar.prepend(wrap);
+    } else {
+      navLinks.after(wrap);
+    }
+  }
+
+  function openCompactSearch() {
+    if (isExpanded()) return;
+    //si el menú hamburguesa está abierto lo cerramos, para que no quede debajo del buscador
+    const menu = nav.querySelector(".navbar-collapse.show");
+    if (menu) bootstrap.Collapse.getOrCreateInstance(menu).hide();
+
+    nav.classList.add("navbar--searching");
+    wrap.classList.add("search__wrap--expanded");
+    toggle.setAttribute("aria-expanded", "true");
+    input.focus();
+    //agregamos una entrada al historial: así el botón "atrás" cierra el buscador en vez de salir de la página
+    history.pushState({ sumbuSearch: true }, "");
+  }
+
+  //solo restablece la vista (sin tocar el historial)
+  function collapseSearchUI() {
+    nav.classList.remove("navbar--searching");
+    wrap.classList.remove("search__wrap--expanded");
+    toggle.setAttribute("aria-expanded", "false");
+    input.value = "";
+    input.blur();
+    hideDropdown();
+  }
+
+  function closeCompactSearch() {
+    if (!isExpanded()) return;
+    //si abrimos con pushState, volvemos atrás y el evento popstate se encarga de cerrar
+    if (history.state && history.state.sumbuSearch) {
+      history.back();
+    } else {
+      collapseSearchUI();
+    }
+  }
+
+  //navegar desde el buscador: si hay una entrada "falsa" en el historial la reemplazamos,
+  //para que al volver desde la otra página no haya que tocar "atrás" dos veces
+  function goTo(url) {
+    if (history.state && history.state.sumbuSearch) {
+      window.location.replace(url);
+    } else {
+      window.location.href = url;
+    }
+  }
+
+  toggle.addEventListener("click", openCompactSearch);
+  back.addEventListener("click", closeCompactSearch);
+  window.addEventListener("popstate", () => {
+    if (isExpanded()) collapseSearchUI();
+  });
+  NAVBAR_MOBILE_QUERY.addEventListener("change", placeSearch);
+  SEARCH_COMPACT_QUERY.addEventListener("change", closeCompactSearch);
+  placeSearch();
 
   //Busqueda dinamica mientras el usuario escribe(evento input)
   input.addEventListener("input", () => {
@@ -135,39 +177,33 @@ function initSearch() {
     const query = input.value.trim();
     if (query.length < 2) return;
 
-    e.preventDefault(); //opcional: prevenimos el comportamiento por defecto del Enter, que podría ser enviar un formulario si el input está dentro de uno
+    e.preventDefault();
     hideDropdown();
-    //redireccionamos a la página de resultados con el query en la URL
-    window.location.href =
-      basePath + "pages/search.html?q=" + encodeURIComponent(query);
+    goTo(basePath + "pages/search.html?q=" + encodeURIComponent(query));
   });
 
   //click en un resultado del dropdown
   dropdown.addEventListener("click", (e) => {
     const item = e.target.closest(".search__result-item");
     if (!item) return; //validacion por si el click no es en un item del dropdown
-
     const productId = item.dataset.productId;
-    const category = item.dataset.category;
-    const currentPage = getCurrentPage();
 
-    input.value = ""; // Limpiar el input
-    hideDropdown(); // Ocultar el dropdown
-
-    //si estamos en una pagina de categoria, abrimos el modal directamente
-    if (CATEGORY_FILES[currentPage] && typeof openProductModal === "function") {
+    if (canOpenModalHere) {
+      input.value = "";
+      hideDropdown();
+      closeCompactSearch(); //si estaba abierto como lupa, vuelve a la lupa
       openProductModal(productId);
     } else {
-      // Ir a la página de categoría con el id del producto en la URL
-      const targetPage = CATEGORY_PAGES[category] || "index.html";
-      window.location.href = basePath + targetPage + "?open=" + productId;
+      //vamos a la página de la categoría y el modal se abre allá (ver handleSearchDirect)
+      goTo(basePath + getCategoryPagePath(productId) + "?open=" + productId);
     }
   });
 
-  //cerramos al hacer click afuera del input o del dropdown
+  //cerramos al hacer click afuera del buscador
   document.addEventListener("click", (e) => {
     if (!e.target.closest(".search__wrap")) {
       hideDropdown();
+      closeCompactSearch();
     }
   });
 
@@ -175,29 +211,22 @@ function initSearch() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       hideDropdown();
-      input.blur(); //quitar foco del input
+      input.blur();
+      closeCompactSearch();
     }
   });
 }
 
 /**
- * Si la URL tiene ?open=productId, abrimos el modal del producto correspondiente al cargar la página
+ * Si la URL tiene ?open=productId (venimos de un resultado del buscador), abrimos el modal de ese producto
  */
 function handleSearchDirect() {
-  const params = new URLSearchParams(window.location.search);
-  const productId = params.get("open");
-  if (!productId) return;
+  const productId = new URLSearchParams(window.location.search).get("open");
+  if (!productId || !document.getElementById("modal-container")) return;
 
-  //Espera a que las cards esten renderizadas, luego abre el modal
-  setTimeout(() => {
-    if (typeof openProductModal === "function") {
-      //como en el resto, hacemos la comprobación de que la función existe para evitar errores si no se ha cargado el script del modal
-      openProductModal(productId);
-    }
-    //limpiamos la URL para que no se abra el modal al recargar
-    const cleanUrl = window.location.pathname;
-    history.replaceState(null, "", cleanUrl);
-  }, 150); //espera 150ms para que las cards se rendericen, si no, no encuentra el producto y no abre el modal
+  openProductModal(productId);
+  //limpiamos la URL para que no se vuelva a abrir el modal al recargar
+  history.replaceState(null, "", window.location.pathname);
 }
 
 document.addEventListener("DOMContentLoaded", handleSearchDirect);

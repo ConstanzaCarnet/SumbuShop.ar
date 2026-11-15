@@ -69,18 +69,11 @@ function buildCarousel(product, basePath) {
  */
 
 function openProductModal(productId) {
-  //buscamos el producto en las categorías
-  let product = null;
-  for (const category of Object.values(PRODUCTS)) {
-    product = category.find((p) => p.id === productId);
-    if (product) break;
-  }
+  const product = findProductById(productId);
   if (!product)
     return console.error(`Producto con id ${productId} no encontrado`);
-  const basePath = getBasePath();
   modalQty = 1; //reiniciamos la cantidad a 1 cada vez que se abre el modal
-  const carousel = buildCarousel(product, basePath);
-  const price = product.price.toLocaleString("es-AR");
+  const carousel = buildCarousel(product, getBasePath());
 
   const modalHTML = `
     <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
@@ -104,7 +97,7 @@ function openProductModal(productId) {
                 <span class="product__card__cat">${product.category}</span>
                 <h2 class="product__modal__name" id="productModalLabel">${product.name}</h2>
                 <p class="product__modal__desc">${product.description}</p>
-                <p class="product__modal__price">$${price}</p>
+                <p class="product__modal__price">${formatPrice(product.price)}</p>
 
                 <!-- Contador de cantidad -->
                 <div class="quantity-control mb-3">
@@ -157,17 +150,14 @@ function changeModalQty(delta) {
  * @param {string} productId - id del producto a agregar
  */
 function handleModalAddToCart(productId) {
-  //reviso que el usuario esté logueado antes de agregar al carrito
+  //reviso que el usuario esté logueado antes de agregar al carrito;
+  //si no, redirectToLogin() guarda esta página para volver acá después del login
   if (!isLoggedIn()) {
-    //con sessionStorage guardo la página actual para redirigir después del login
-    //setItem guarda la página actual en sessionStorage con la clave "sumbu-redirect" y el valor de la URL actual (window.location.href). Esto permite que después de que el usuario inicie sesión, pueda ser redirigido de vuelta a la página donde estaba antes de intentar agregar un producto al carrito.
-    sessionStorage.setItem("sumbu-redirect", window.location.href); //guardamos la página actual para redirigir después del login
-    window.location.href = getBasePath() + "pages/login.html";
+    redirectToLogin();
     return;
   }
-  addToCart(productId, modalQty);
-  updateCartBadge();
-  showToast("Producto agregado al carrito", "success");
+  addToCart(productId, modalQty); //addToCart ya actualiza el badge
+  showToast(`¡Agregado al carrito! ×${modalQty}`);
   //cierro el modalEl
   const modalEl = document.getElementById("productDetailModal");
   if (modalEl) {

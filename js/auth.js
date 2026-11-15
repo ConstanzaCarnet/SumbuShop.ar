@@ -29,14 +29,14 @@ function findUser(email) {
  * @param {string} email
  * @param {string} password
  * @param {string} fechaNacimiento - formato "AAAA-MM-DD" (valor del input type="date")
- * @returns {{ ok: boolean, error?: string }}
+ * @returns {{ ok: boolean, user?: Object, error?: string }}
  */
 function registerUser(nombre, apellido, usuario, email, password, fechaNacimiento) {
   if (findUser(email)) {
     return { ok: false, error: "Ya existe una cuenta con ese email." };
   }
   const users = getUsers();
-  users.push({
+  const user = {
     nombre: nombre.trim(),
     apellido: apellido.trim(),
     usuario: usuario.trim(),
@@ -44,9 +44,10 @@ function registerUser(nombre, apellido, usuario, email, password, fechaNacimient
     password, // texto plano — solo para demostración
     fechaNacimiento,
     createdAt: new Date().toISOString(),
-  });
+  };
+  users.push(user);
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
-  return { ok: true };
+  return { ok: true, user };
 }
 
 /**
@@ -106,4 +107,25 @@ function getSession() {
  */
 function isLoggedIn() {
   return getSession() !== null;
+}
+
+// ─── Volver a la página de origen después del login ────────────────────────
+//guardamos en sessionStorage la página donde estaba el usuario, para regresar ahí después de iniciar sesión
+const REDIRECT_KEY = "sumbu-redirect";
+
+function saveRedirect() {
+  sessionStorage.setItem(REDIRECT_KEY, window.location.href);
+}
+
+//guarda la página actual y manda al login (lo usan "Agregar al carrito" y la página del carrito)
+function redirectToLogin() {
+  saveRedirect();
+  window.location.href = getBasePath() + "pages/login.html";
+}
+
+//después de loguearse: devuelve la página guardada (o el inicio) y la borra
+function popRedirect() {
+  const redirect = sessionStorage.getItem(REDIRECT_KEY);
+  sessionStorage.removeItem(REDIRECT_KEY);
+  return redirect || getBasePath() + "index.html";
 }

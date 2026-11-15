@@ -4,7 +4,7 @@
    2. Modo oscuro
    3. Reset y base
    4. Botones
-   5. Navbar
+   5. Navbar (5b. Buscador del navbar)
    6. Home: hero, presentación, categorías, sobre nosotros
    7. Secciones y encabezados de páginas
    8. Página "Sobre nosotros"
@@ -14,6 +14,7 @@
    12. Carrito
    13. Toast de confirmación
    14. Footer
+   15. Opiniones (carrusel del index)
    ========================================================= */
 
 /* ─── 1. Variables: colores y fuentes globales (theme: light por defecto) ─── */
@@ -83,11 +84,17 @@
   background-color: #1a110b;
   border-bottom-color: #3a2820;
 }
-[data-theme="dark"] .navbar-toggler-icon {
-  filter: invert(1);
+[data-theme="dark"] .cart__badge {
+  border-color: #1a110b; /* mismo color que el navbar oscuro */
 }
-[data-theme="dark"] .cart__btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+/* en oscuro el borde general (--color-border) casi no se ve sobre el navbar: lo aclaramos un poco */
+[data-theme="dark"] .nav__icon-btn:not(.nav__icon-btn--plain),
+[data-theme="dark"] .search__input {
+  border-color: #4d372a;
+}
+[data-theme="dark"] .nav__icon-btn:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(232, 96, 58, 0.12);
 }
 /* la X de cerrar de Bootstrap es negra: la invertimos para que se vea */
 [data-theme="dark"] .product__modal__close {
@@ -199,39 +206,67 @@ a {
   color: #fff;
 }
 
-/* Botón de cambio de tema (navbar) */
-.btn__theme {
-  background: none;
-  border: 1.5px solid var(--color-border);
-  color: var(--color-text-soft);
+/* Botones de ícono del navbar (tema, carrito, lupa, hamburguesa): todos iguales,
+   círculo de 40px con contorno suave que se tiñe del color principal al pasar el mouse */
+.nav__icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
   padding: 0;
+  background: transparent;
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-pill);
+  color: var(--color-text-soft);
   cursor: pointer;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition:
     border-color 0.2s,
+    background-color 0.2s,
     color 0.2s;
-  flex-shrink: 0;
 }
-.btn__theme:hover {
+.nav__icon-btn:hover {
   border-color: var(--color-primary);
+  background-color: rgba(192, 74, 42, 0.08);
   color: var(--color-primary);
 }
+.nav__icon-btn:focus {
+  box-shadow: none; /* saca el recuadro de foco de Bootstrap en la hamburguesa */
+}
+.nav__icon-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+/* variante sin contorno: la flecha ← al lado del campo de búsqueda */
+.nav__icon-btn--plain {
+  border-color: transparent;
+}
 
-/* Botón de cerrar sesión (navbar) */
+/* íconos SVG de línea (ver navIcon() en navbar.js y getThemeIcon() en theme.js) */
+.nav__icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Botón de iniciar / cerrar sesión (navbar): misma altura que los botones de ícono */
 .btn-logout {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-primary);
   border: 1.5px solid var(--color-primary);
   background: none;
-  padding: 0.45rem 1.1rem;
+  padding: 0 1.1rem;
   border-radius: var(--radius-pill);
   cursor: pointer;
   transition: all 0.2s;
@@ -298,48 +333,289 @@ a {
   white-space: nowrap;
 }
 
-/* Botón carrito + badge con la cantidad */
-.cart__btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  padding: 0.25rem 0.35rem;
-  border-radius: var(--radius-sm);
-  transition: background 0.15s;
-}
-.cart__btn:hover {
-  background: rgba(0, 0, 0, 0.06);
-}
-
+/* badge con la cantidad, sobre el borde del botón del carrito */
 .cart__badge {
   position: absolute;
-  top: -4px;
+  top: -6px;
   right: -6px;
   background: var(--color-primary);
   color: #fff;
   font-size: 0.65rem;
   font-weight: 700;
-  min-width: 18px;
-  height: 18px;
+  min-width: 19px;
+  height: 19px;
+  border: 2px solid var(--color-surface); /* aro del color del navbar para separarlo del contorno */
   border-radius: var(--radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 3px;
+  padding: 0 4px;
   line-height: 1;
 }
 
-/* menú colapsado (hamburguesa): el navbar usa navbar-expand-lg, así que colapsa hasta 991px */
-@media (max-width: 991.98px) {
+/* contenedor de accesos rápidos (lupa + carrito): solo se usa con el menú hamburguesa */
+.navbar__quick {
+  display: none;
+}
+
+/* menú hamburguesa: el navbar usa navbar-expand-xl, así que colapsa hasta 1199px
+   (con lg los links + el buscador no entraban entre 992 y 1199px y se desbordaba) */
+@media (max-width: 1199.98px) {
+  .navbar .container-fluid {
+    padding: 0 1rem;
+  }
+  /* la fila superior mantiene su altura aunque el menú esté abierto (si no, el logo y los botones suben) */
+  .navbar-brand {
+    padding: 0;
+    line-height: 76px;
+  }
+  /* barra superior: logo a la izquierda; lupa, carrito y hamburguesa juntos a la derecha */
+  .navbar__quick {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    margin-right: 0.5rem; /* misma separación que hay entre la lupa y el carrito */
+  }
+
+  /* menú desplegable */
   .navbar-collapse {
     padding: 0.5rem 0 1rem;
     border-top: 1px solid var(--color-border);
   }
-  .navbar-nav .nav-link {
-    padding: 0.6rem 0 !important;
+  .navbar-nav {
+    gap: 0 !important;
   }
+  .navbar-nav .nav-link {
+    padding: 0.55rem 0.75rem !important;
+    border-radius: var(--radius-sm);
+  }
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    background: rgba(0, 0, 0, 0.04);
+  }
+  [data-theme="dark"] .navbar-nav .nav-link:hover,
+  [data-theme="dark"] .navbar-nav .nav-link.active {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  /* fila de abajo: tema a la izquierda, sesión a la derecha, separada de los links */
+  .navbar__tools {
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding: 0.75rem 0.75rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+/* ─── 5b. Buscador del navbar ─── */
+.search__wrap {
+  position: relative;
+  flex: 1 1 auto;
+  max-width: 400px;
+  min-width: 160px;
+  margin: 0 auto 0 1rem; /* el auto a la derecha empuja los botones (tema, carrito, sesión) al borde */
+}
+
+.search__input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* lupa decorativa dentro del campo */
+.search__icon {
+  position: absolute;
+  left: 0.8rem;
+  display: flex;
+  color: var(--color-text-soft);
+  pointer-events: none;
+}
+.search__icon .nav__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.search__input {
+  width: 100%;
+  padding: 0.4rem 0.75rem 0.4rem 2.1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  outline: none;
+}
+.search__input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(201, 125, 74, 0.15);
+}
+.search__input::placeholder {
+  color: var(--color-text-soft);
+}
+
+/* Lupa (abre el buscador) y flecha (lo cierra): usan .nav__icon-btn, pero solo se ven en el modo compacto */
+.search__toggle,
+.search__back {
+  display: none;
+}
+
+/* Modo compacto (hasta 1399px): solo la lupa, se expande al tocarla (ver initSearch en search.js) */
+@media (max-width: 1399.98px) {
+  .search__wrap {
+    flex: 0 0 auto;
+    min-width: 0;
+    max-width: none;
+    margin: 0 0.5rem 0 auto;
+  }
+  .search__toggle {
+    display: inline-flex;
+  }
+  .search__input-wrap {
+    display: none;
+  }
+
+  .search__wrap--expanded {
+    flex: 1 1 auto;
+  }
+  .search__wrap--expanded .search__toggle {
+    display: none;
+  }
+  .search__wrap--expanded .search__input-wrap {
+    display: flex;
+    gap: 0.25rem;
+    animation: searchExpand 0.25s ease-out;
+    transform-origin: right center;
+  }
+  .search__wrap--expanded .search__back {
+    display: inline-flex;
+  }
+  /* la lupa decorativa queda a la derecha de la flecha */
+  .search__wrap--expanded .search__icon {
+    left: calc(40px + 0.25rem + 0.8rem);
+  }
+  .search__wrap--expanded .search__input {
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+    font-size: 1rem; /* 16px evita que iOS haga zoom al enfocar */
+  }
+}
+
+/* escritorio mediano (1200-1399px): links más juntos, y al abrir el buscador ocupa el lugar de los links */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .nav-link {
+    padding: 0.5rem 0.5rem !important;
+  }
+  .navbar--searching .navbar-nav {
+    display: none;
+  }
+  .search__wrap--expanded {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+}
+
+/* con menú hamburguesa (hasta 1199px): al abrir el buscador ocupa toda la barra superior */
+@media (max-width: 1199.98px) {
+  .search__wrap {
+    margin: 0;
+  }
+  .navbar--searching .navbar-brand,
+  .navbar--searching .navbar-toggler,
+  .navbar--searching .navbar__quick .cart__btn {
+    display: none;
+  }
+  .navbar--searching .navbar__quick {
+    flex: 1 1 auto;
+    margin-left: 0;
+  }
+}
+
+@keyframes searchExpand {
+  from {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Dropdown de resultados */
+.search__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem 0;
+  z-index: 1050;
+  display: none;
+  max-height: 360px;
+  overflow-y: auto;
+}
+.search__dropdown--open {
+  display: block;
+}
+
+.search__result-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: var(--radius-sm);
+  margin: 0.1rem 0.3rem;
+}
+.search__result-item:hover {
+  background: var(--color-bg);
+}
+
+.search__result-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 0.4rem;
+  flex-shrink: 0;
+  background: var(--color-bg);
+}
+
+.search__result-info {
+  flex: 1;
+  min-width: 0;
+}
+.search__result-name {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search__result-meta {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-soft);
+  margin-top: 0.1rem;
+}
+
+/* Mensaje "sin resultados" */
+.search__no-results {
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  text-align: center;
 }
 
 /* ─── 6. Home ─── */
@@ -549,6 +825,11 @@ a {
   margin-bottom: 1.5rem;
   max-width: 90%;
 }
+/* botón "Conocer más" sobre el fondo de color: borde y texto blancos */
+.about__btn {
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #fff !important;
+}
 .about__visual {
   background-color: rgba(255, 255, 255, 0.08);
   display: flex;
@@ -606,13 +887,28 @@ a {
   text-decoration: underline;
 }
 
-/* Encabezados de color de cada categoría */
+/* título grande y texto introductorio de los encabezados de categorías y resultados */
+.section__title--lg {
+  font-size: 2.4rem;
+}
+.section__intro {
+  color: var(--color-text-soft);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  max-width: 480px;
+}
+
+/* Encabezados de color de cada categoría y de la página de resultados */
 .header__jam,
 .header__preserved,
 .header__mache,
 .header__cosmetics,
-.header__bakery {
+.header__bakery,
+.header__search {
   padding: 3.5rem 0;
+}
+.header__search {
+  background: var(--color-header);
 }
 .header__jam {
   background: linear-gradient(145deg, #fde8dc, #f5c4a8);
@@ -1050,137 +1346,176 @@ a {
 .site__footer a:hover {
   color: rgba(255, 255, 255, 0.85);
 }
-/*Buscador estilos
-*/
 
-.search__wrap {
-  position: relative;
-  flex: 1 1 auto;
-  max-width: 400px;
-  min-width: 160px;
-  margin: 0 1rem;
+/* ─── 15. Opiniones (carrusel del index, lo arma js/reviews.js) ─── */
+.reviews__section {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
-.search__input-wrap {
-  position: relative;
+/* resumen: "4,8 ★★★★★ 8 opiniones" */
+.reviews__summary {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
 }
-
-.search__icon {
-  position: absolute;
-  left: 0.75rem;
+.reviews__score {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.reviews__count {
   font-size: 0.9rem;
-  pointer-events: none;
-  opacity: 0.6;
+  color: var(--color-text-soft);
 }
 
-.search__input {
-  width: 100%;
-  padding: 0.4rem 0.75rem 0.4rem 2.1rem;
-  border: 1.5px solid var(--color-border, #e0d9d0);
-  border-radius: 2rem;
-  background: var(--color-bg-card, #fff);
-  color: var(--color-text, #2d2a26);
-  font-size: 0.875rem;
-  font-family: var(--font-body, "Lato", sans-serif);
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
-  outline: none;
+/* carrusel: espacio a los costados para las flechas y abajo para los puntitos */
+.reviews__carousel {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 3.5rem 2.5rem;
 }
 
-.search__input:focus {
-  border-color: var(--color-accent, #c97d4a);
-  box-shadow: 0 0 0 3px rgba(201, 125, 74, 0.15);
+/* tarjeta de cada opinión, al estilo de una reseña de Google */
+.review__card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
 }
-
-.search__input::placeholder {
-  color: var(--color-text-soft, #9e9589);
-}
-
-/* Dropdown */
-.search__dropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: var(--color-bg-card, #fff);
-  border: 1.5px solid var(--color-border, #e0d9d0);
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  list-style: none;
-  margin: 0;
-  padding: 0.3rem 0;
-  z-index: 1050;
-  display: none;
-  max-height: 360px;
-  overflow-y: auto;
-}
-
-.search__dropdown.search__dropdown--open {
-  display: block;
-}
-
-/* Cada resultado */
-.search__result-item {
+.review__header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0.9rem;
-  cursor: pointer;
-  transition: background 0.15s;
-  border-radius: 0.5rem;
-  margin: 0.1rem 0.3rem;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
 }
-
-.search__result-item:hover,
-.search__result-item:focus {
-  background: var(--color-bg-alt, #f7f3ef);
-  outline: none;
-}
-
-.search__result-img {
+.review__avatar {
   width: 44px;
   height: 44px;
-  object-fit: cover;
-  border-radius: 0.4rem;
   flex-shrink: 0;
-  background: var(--color-bg-alt, #f7f3ef);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.search__result-info {
+/* sin el margin-bottom que Bootstrap le pone a los <p> */
+.review__name,
+.review__meta,
+.review__stars {
+  margin: 0;
+}
+.review__name {
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+.review__meta {
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+}
+.review__stars {
+  color: #f4b400; /* el amarillo de las estrellas de Google */
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
+.review__comment {
   flex: 1;
-  min-width: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0.5rem 0 1rem;
 }
-
-.search__result-name {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text, #2d2a26);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.search__result-meta {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--color-text-soft, #9e9589);
-  margin-top: 0.1rem;
-}
-
-/* Encabezado de la página de resultados */
-.header__search {
-  background: var(--color-header);
-  padding: 3.5rem 0;
-}
-
-/* Mensaje "sin resultados" */
-.search__no-results {
-  padding: 0.75rem 1rem;
+.review__product {
+  align-self: flex-start;
   font-size: 0.85rem;
-  color: var(--color-text-soft, #9e9589);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.review__product:hover {
+  text-decoration: underline;
+}
+
+/* flechas: círculos con contorno, como los botones del navbar */
+.reviews__carousel .carousel-control-prev,
+.reviews__carousel .carousel-control-next {
+  top: calc(50% - 1.25rem - 20px); /* centradas respecto de la tarjeta (sin contar los puntitos) */
+  bottom: auto;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  opacity: 1;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
+}
+.reviews__carousel .carousel-control-prev:hover,
+.reviews__carousel .carousel-control-next:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(192, 74, 42, 0.08);
+}
+.reviews__carousel .carousel-control-prev-icon,
+.reviews__carousel .carousel-control-next-icon {
+  width: 1rem;
+  height: 1rem;
+  filter: invert(35%); /* los íconos de Bootstrap son blancos: los oscurecemos */
+}
+[data-theme="dark"] .reviews__carousel .carousel-control-prev-icon,
+[data-theme="dark"] .reviews__carousel .carousel-control-next-icon {
+  filter: none;
+}
+[data-theme="dark"] .reviews__carousel .carousel-control-prev,
+[data-theme="dark"] .reviews__carousel .carousel-control-next {
+  border-color: #4d372a; /* mismo borde que los botones del navbar en oscuro */
+}
+[data-theme="dark"] .reviews__carousel .carousel-control-prev:hover,
+[data-theme="dark"] .reviews__carousel .carousel-control-next:hover {
+  border-color: var(--color-primary);
+}
+
+/* puntitos debajo de la tarjeta */
+.reviews__carousel .carousel-indicators {
+  margin-bottom: 0;
+}
+.reviews__carousel .carousel-indicators [data-bs-target] {
+  width: 8px;
+  height: 8px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary);
+}
+
+@media (max-width: 575.98px) {
+  .reviews__carousel {
+    padding: 0 0 2.5rem;
+  }
+  .reviews__carousel .carousel-control-prev,
+  .reviews__carousel .carousel-control-next {
+    display: none; /* en celular se pasa deslizando o con los puntitos */
+  }
+  .review__card {
+    padding: 1.5rem 1.25rem;
+    min-height: 300px;
+  }
+}
+
+/* aviso cuando no se pueden cargar las opiniones (por ejemplo, abriendo el index.html con doble click) */
+.reviews__error {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
   text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
 }

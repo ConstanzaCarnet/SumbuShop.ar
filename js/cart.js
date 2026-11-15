@@ -17,12 +17,7 @@ function saveCart(cart) {
 //Operaciones con el carrito
 //agregar un producto al carrito, si el producto ya existe, se incrementa la cantidad
 function addToCart(productId, quantity = 1) {
-  //busco y veo si exite
-  let product = null;
-  for (const category of Object.values(PRODUCTS)) {
-    product = category.find((p) => p.id === productId);
-    if (product) break;
-  }
+  const product = findProductById(productId);
   if (!product) return;
   const cart = getCart();
   const existing = cart.find((item) => item.id === product.id);
@@ -96,7 +91,4 @@ function updateCartBadge() {
   badge.textContent = count;
   badge.style.display = count > 0 ? "flex" : "none";
 }
-//inicializamos el badge del carrito al cargar la página, para que se muestre correctamente el número de items en el carrito
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(updateCartBadge, 100); //esperamos un poco para que se cargue el DOM y el badge del carrito
-});
+//el badge se inicializa en renderNavbar(), apenas se crea el navbar

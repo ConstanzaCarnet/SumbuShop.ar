@@ -274,3 +274,47 @@ const PRODUCTS = {
     },
   ],
 };
+
+// ─── Helpers para usar los datos (los usan el carrito, las cards, el modal y el buscador) ───
+
+/**
+ * Busca un producto por id en todas las categorías.
+ * @param {string} productId
+ * @returns {Object|null}
+ */
+function findProductById(productId) {
+  for (const products of Object.values(PRODUCTS)) {
+    const product = products.find((p) => p.id === productId);
+    if (product) return product;
+  }
+  return null;
+}
+
+/**
+ * Ruta (desde la raíz) de la página de categoría de un producto.
+ * Las claves de PRODUCTS (jams, preserved...) son las mismas que los id de NAV_PAGES.
+ * @param {string} productId
+ * @returns {string}
+ */
+function getCategoryPagePath(productId) {
+  for (const [key, products] of Object.entries(PRODUCTS)) {
+    if (products.some((p) => p.id === productId)) {
+      const page = NAV_PAGES.find((p) => p.id === key);
+      if (page) return page.path;
+    }
+  }
+  return "index.html";
+}
+
+/**
+ * Formatea un precio en pesos argentinos: 1800 → "$ 1.800"
+ * @param {number} amount
+ * @returns {string}
+ */
+function formatPrice(amount) {
+  return amount.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    minimumFractionDigits: 0,
+  });
+}

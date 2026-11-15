@@ -6,19 +6,11 @@
  */
 function createProductCard(product) {
   const base = getBasePath();
-  const formattedPrice = product.price.toLocaleString("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    minimumFractionDigits: 0,
-  });
-  //usat la primera imagen del array de imágenes para la card
-  const thumbnail =
-    product.images && product.images.length > 0
-      ? product.images[0]
-      : "img/placeholder.jpg";
+  //la card usa la primera imagen del array
+  const thumbnail = product.images[0];
   //indicador de multiples imágenes
   const multiImg =
-    product.images && product.images.length > 1
+    product.images.length > 1
       ? `<span class="product__card__multi-img" title="${product.images.length} fotos">
         📷 ${product.images.length}
        </span>`
@@ -41,7 +33,7 @@ function createProductCard(product) {
           <h3 class="product__card__name product__card__name--link" onclick="openProductModal('${product.id}')">${product.name}</h3>
           <p class="product__card__desc">${product.description}</p>
 
-          <div class="product__card__price">${formattedPrice}</div>
+          <div class="product__card__price">${formatPrice(product.price)}</div>
 
           <div class="product__card__actions">
             <div class="quantity-control">
@@ -87,14 +79,11 @@ function changeQty(productId, delta) {
 //agregar al carrito(chequeamos siempre sesion)
 function handleAddToCart(productId) {
   if (!isLoggedIn()) {
-    const base = getBasePath();
-    sessionStorage.setItem("sumbu-redirect", window.location.href);
-    window.location.href = base + "pages/login.html";
+    redirectToLogin();
     return;
   }
   const qty = quantities[productId] || 1;
-  addToCart(productId, qty);
-  updateCartBadge();
+  addToCart(productId, qty); //addToCart ya actualiza el badge
   showToast(`¡Agregado al carrito! ×${qty}`);
 }
 
