@@ -53,12 +53,14 @@ Cualquier persona puede recorrer la tienda, ver los productos y usar el buscador
 El trabajo se organizó en etapas que acompañaron las entregas parciales. Las fechas salen del historial de commits del repositorio (40 commits entre agosto y noviembre de 2026).
 
 ### Etapa 0 / 1 — Boceto, estructura y primeros estilos (21 al 28 de agosto)
+
 - Boceto inicial del e-commerce: rubro, nombre y categorías.
 - Estructura HTML de todas las páginas: inicio, "Sobre nosotros", una página por categoría y los formularios de **registro y login**.
 - Primeros estilos con CSS propio y estilos para los formularios.
 - Organización de carpetas y corrección de rutas entre páginas.
 
 ### Etapa 2 — Diseño con Bootstrap y pulido visual (11 al 18 de septiembre)
+
 - Incorporación de **Bootstrap 5**: hero, botones, navbar responsive.
 - Pulido sección por sección: mermeladas, conservas, cosmética, papel maché, login, registro e index.
 - Se agregó la categoría **Pastelería** y se mejoraron las cards.
@@ -66,6 +68,7 @@ El trabajo se organizó en etapas que acompañaron las entregas parciales. Las f
 - **Tema claro / oscuro** y ajuste de la paleta de colores.
 
 ### Etapa 3 — Datos, carrito y componentes con JavaScript (6 al 16 de octubre)
+
 - Correcciones de las observaciones de la entrega anterior y primera **unificación** de código.
 - Fuente de datos de productos (`data.js`) y cards generadas desde esos datos.
 - **Carrito** con `localStorage` y lógica de **registro / login** con JavaScript.
@@ -74,11 +77,13 @@ El trabajo se organizó en etapas que acompañaron las entregas parciales. Las f
 - Uso de `sessionStorage` y mejoras de estética en el botón de cerrar sesión.
 
 ### Etapa 4 — Buscador y mejoras del carrito (6 de noviembre)
+
 - **Buscador** de productos en el navbar.
 - Eliminar productos del carrito.
 - Actualización del README.
 
 ### Etapa final — Refactorización, publicación y cierre (15 y 16 de noviembre)
+
 - Mejoras del buscador: búsqueda sin acentos, lupa compacta en el celular y página de resultados.
 - Página de **catálogo** (`products.html`) con todos los productos y botón **"Ver más"**.
 - **Opiniones de clientes** en `data/reviews.json`, cargadas con **`fetch`** en un carrusel.
@@ -89,6 +94,7 @@ El trabajo se organizó en etapas que acompañaron las entregas parciales. Las f
 - Publicación en **Vercel** y documentación (README y este documento).
 
 ### Cambios de rumbo durante el proceso
+
 - **Login:** al principio, después de iniciar sesión siempre se volvía al inicio. Se cambió para que vuelva a la página donde estaba el usuario. Así, si quiso agregar un producto desde una categoría, vuelve ahí y sigue comprando.
 - **`fetch`:** los productos quedaron en `data.js` y el uso de `fetch` + JSON se muestra con las opiniones de clientes (acordado con el profesor). Para mostrar todos los productos se usa la página de catálogo, a la que se llega desde "Explorar productos".
 - **Rutas:** las rutas fijas fallaban al pasar de Live Server a Vercel, así que se reemplazaron por rutas calculadas con `getBasePath()`. También se corrigieron nombres de imágenes, porque Vercel distingue mayúsculas de minúsculas.
