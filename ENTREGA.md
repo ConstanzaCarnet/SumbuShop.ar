@@ -5,11 +5,11 @@
 
 ## Links
 
-|                      |                                                     |
-| -------------------- | --------------------------------------------------- |
-| 🌐 Sitio publicado   | https://sumbu-shop-ar.vercel.app/                   |
-| 💻 Repositorio       | https://github.com/ConstanzaCarnet/SweetJar.ar      |
-| 🎥 Video explicativo | _(completar con el link de YouTube / Drive / Loom)_ |
+|                      |                                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------- |
+| 🌐 Sitio publicado   | https://sumbu-shop-ar.vercel.app/                                                  |
+| 💻 Repositorio       | https://github.com/ConstanzaCarnet/SweetJar.ar                                     |
+| 🎥 Video explicativo | https://drive.google.com/file/d/196LTCk1I3birjICJjMP6ELjbANb_z6aH/view?usp=sharing |
 
 ---
 
