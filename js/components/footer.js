@@ -29,7 +29,7 @@ function renderFooter() {
       </div>
     </footer>
 
-    <!-- Modal de contacto simulado (datos ficticios, sitio de demostración) -->
+    <!-- Modal de contacto simulado (datos ficticios, sitio de demostración, mi cliente aun no quiere poner su WhatsApp) -->
     <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <!-- text-dark para que el texto se lea bien sobre el fondo blanco del modal, incluso en modo oscuro -->
@@ -59,7 +59,7 @@ function renderFooter() {
       </div>
     </div>`;
 
-  //al tocar el botón verde mostramos el mensaje de simulación en lugar de abrir WhatsApp de verdad
+  //al tocar el botón verde muestro el mensaje de simulación en lugar de abrir WhatsApp de verdad para evitar problemas de privacidad y seguridad en la demo
   const whatsappBtn = document.getElementById("whatsappBtn");
   const whatsappMsg = document.getElementById("whatsappMsg");
   whatsappBtn.addEventListener("click", () => {
@@ -67,9 +67,11 @@ function renderFooter() {
   });
 
   //cuando se cierra el modal volvemos a ocultar el mensaje, así la próxima vez arranca limpio
-  document.getElementById("contactModal").addEventListener("hidden.bs.modal", () => {
-    whatsappMsg.classList.add("d-none");
-  });
+  document
+    .getElementById("contactModal")
+    .addEventListener("hidden.bs.modal", () => {
+      whatsappMsg.classList.add("d-none");
+    });
 }
 //addEventListener para que cuando el DOM esté cargado, se ejecute la función renderFooter
 document.addEventListener("DOMContentLoaded", renderFooter);
