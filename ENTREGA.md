@@ -145,20 +145,6 @@ El trabajo se organizó en etapas que acompañaron las entregas parciales. Las f
 
 ---
 
-## 6. Consignas de la etapa 4
-
-| Consigna                                                             | Estado                                                               |
-| -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Fuente de datos de productos                                         | ✅ `js/data.js`, organizada por categoría                            |
-| Traer datos con `fetch`                                              | ✅ Opiniones desde `data/reviews.json` (acordado con el profesor)    |
-| Cards con la información de cada producto por categoría              | ✅ Una página por categoría                                          |
-| Cards con título, imagen, descripción, precio, + / − y botón agregar | ✅                                                                   |
-| Mostrar productos en la tienda                                       | ✅ Catálogo completo en `products.html` (botón "Explorar productos") |
-| Usuario logueado en `sessionStorage`                                 | ✅ (también se recuerda en `localStorage`)                           |
-| Productos a comprar en `localStorage`                                | ✅                                                                   |
-| Mostrar los productos en el carrito                                  | ✅                                                                   |
-| Eliminar productos del carrito (opcional)                            | ✅ Eliminar uno, vaciar todo y bajar la cantidad a 0                 |
-
-## 7. Cómo verlo en local
+## 6. Cómo verlo en local
 
 Clonar el repositorio y abrirlo con **Live Server** (VS Code). Abriendo `index.html` con doble click también funciona, salvo las opiniones: el navegador no permite `fetch` en archivos locales (`file://`), y en ese caso se muestra un aviso con el link al sitio publicado.
