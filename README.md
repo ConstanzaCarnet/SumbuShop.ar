@@ -16,14 +16,14 @@ En resumen una página ecommerce para la promoción de productos variados.(tiend
 
 ## Login y compra
 
-La tienda se puede recorrer sin iniciar sesión; el login se pide recién al intentar comprar (botón "Agregar" o carrito). La sesión se guarda en `localStorage`, y la página de origen en `sessionStorage` para volver a ella después del login. El navbar muestra "Iniciar sesión" o "Cerrar sesión" según el estado.
+La tienda se puede recorrer sin iniciar sesión; el login se pide recién al intentar comprar (botón "Agregar" o carrito). Los datos del usuario logueado (nombre, apellido, usuario y email; nunca la contraseña) se guardan en `sessionStorage` y también en `localStorage`, para que la sesión se recuerde al volver a abrir la página. Al cerrar sesión se borran de los dos. La página de origen también va en `sessionStorage`, para volver a ella después del login. El navbar muestra "Iniciar sesión" o "Cerrar sesión" según el estado.
 
 ## Cómo verlo
 
 Es un sitio estático (sin build ni dependencias que instalar):
 
 - **Local:** clonar el repositorio y abrirlo con una extensión como **Live Server** (VS Code). Abriendo `index.html` con doble click también funciona, salvo el carrusel de opiniones: se carga con `fetch` y el navegador no permite `fetch` en archivos locales (`file://`), así que en ese caso la sección queda oculta.
-- **Vercel:** importar el repositorio como proyecto sin framework ("Other"); no necesita comando de build y el directorio de salida es la raíz.
+- **Vercel:** importar el repositorio como proyecto sin framework ("Other"); no necesita comando de build y el directorio de salida es la raíz.(https://sumbu-shop-ar.vercel.app/)
 
 Las rutas se calculan desde la ubicación de `js/components/navbar.js` (`getBasePath()`), así que funcionan igual en los dos casos y en cualquier carpeta. Ojo: Vercel distingue mayúsculas de minúsculas en los nombres de archivo, Windows no; al agregar imágenes, escribir la ruta en `data.js` exactamente igual que el nombre del archivo.
 

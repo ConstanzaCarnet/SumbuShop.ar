@@ -69,33 +69,50 @@ function verifyCredentials(email, password) {
 
 // ─── Gestión de sesión ────────────────────────
 
+//La sesión se guarda en los dos storages:
+// - sessionStorage: datos del usuario logueado en la pestaña actual (se borra al cerrar la pestaña)
+// - localStorage: "recordar sesión", para que siga logueado al volver a abrir la página
+//Nunca guardamos la contraseña en la sesión.
+
 /**
- * Inicia sesión guardando los datos del usuario en localStorage.
+ * Inicia sesión guardando los datos del usuario en sessionStorage y en localStorage.
  * @param {Object} user - objeto del usuario registrado
  */
 function loginUser(user) {
   const session = {
     email: user.email,
     name: user.nombre,
+    apellido: user.apellido,
+    usuario: user.usuario,
     loggedAt: new Date().toISOString(),
   };
-  localStorage.setItem(AUTH_KEY, JSON.stringify(session));
+  const data = JSON.stringify(session);
+  sessionStorage.setItem(AUTH_KEY, data);
+  localStorage.setItem(AUTH_KEY, data);
 }
 
 /**
- * Cierra sesión.
+ * Cierra sesión (borra la sesión de los dos storages).
  */
 function logoutUser() {
+  sessionStorage.removeItem(AUTH_KEY);
   localStorage.removeItem(AUTH_KEY);
 }
 
 /**
  * Devuelve el objeto de sesión activa, o null.
+ * Primero busca en sessionStorage; si no está (ej: pestaña nueva), la toma de
+ * localStorage y la vuelve a copiar en sessionStorage.
  * @returns {Object|null}
  */
 function getSession() {
   try {
-    return JSON.parse(localStorage.getItem(AUTH_KEY));
+    let data = sessionStorage.getItem(AUTH_KEY);
+    if (!data) {
+      data = localStorage.getItem(AUTH_KEY);
+      if (data) sessionStorage.setItem(AUTH_KEY, data);
+    }
+    return JSON.parse(data);
   } catch {
     return null;
   }
