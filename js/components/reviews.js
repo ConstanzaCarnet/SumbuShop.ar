@@ -137,10 +137,10 @@ async function renderReviews() {
   } catch (error) {
     //El fetch no funciona abriendo el index.html con doble click (file://): hace falta un servidor
     //(Vercel, Live Server...). En ese caso mostramos un aviso en lugar del carrusel, en caso de que el usuario abra el index.html directamente desde su computadora.
-    //de paso en caso de tener un error de red o de servidor también mostramos un aviso, pero con un mensaje distinto
+    //de paso, en caso de tener un error de red o de servidor también mostramos un aviso, pero con un mensaje distinto(para eso le pasamos el error)
     console.warn("No se pudieron cargar las opiniones:", error);
     const message =
-      window.location.protocol === "file:"
+      window.location.protocol === "file:" //con location.protocol podemos saber si el usuario abrió el index.html directamente desde su computadora (file://) o si lo abrió desde un servidor (http:// o https://)
         ? "Las opiniones se cargan con <code>fetch</code>, que no funciona abriendo el archivo directamente. Abrí el sitio con Live Server o miralas en"
         : "No pudimos cargar las opiniones en este momento. Podés verlas en";
     carousel.innerHTML = `

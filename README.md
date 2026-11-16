@@ -44,14 +44,14 @@ sumbu-shop.ar/
 │   ├── auth.js                 ← Registro, login, logout, sesión y volver a la página de origen
 │   ├── cart.js                 ← Lógica del carrito (localStorage)
 │   ├── search.js               ← Buscador del navbar y armado de la página products.html
-│   ├── reviews.js              ← Carrusel de opiniones del index (fetch a data/reviews.json)
 │   ├── forms.js                ← Submit de login/registro y redirección
 │   ├── theme.js                ← Tema claro/oscuro (se carga en el <head>)
 │   └── components/
 │       ├── navbar.js           ← Navbar (links, link activo, login/logout) y getBasePath()
 │       ├── footer.js           ← Componente footer
 │       ├── productCard.js      ← Componente card de producto (cantidad + agregar al carrito)
-│       └── productModal.js     ← Modal de detalle de producto con carrusel
+│       ├── productModal.js     ← Modal de detalle de producto con carrusel
+│       └── reviews.js          ← Carrusel de opiniones del index (fetch a data/reviews.json)
 │
 └── pages/
     ├── login.html              ← Inicio de sesión

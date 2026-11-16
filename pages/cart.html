@@ -134,33 +134,24 @@
         const cart = getCart();
         const item = cart.find(function (i) { return i.id === productId; });
         if (!item) return;
-        updateCartQty(productId, item.quantity + delta);
+        //si la cantidad baja de 1 se abre el modal de confirmación, y renderCart se ejecuta recién cuando el usuario confirma
+        updateCartQty(productId, item.quantity + delta, renderCart);
         renderCart();
       }
 
       function removeItem(productId) {
-        removeFromCart(productId);
-        renderCart();
+        //el modal de confirmación (cart.js) elimina el producto y después llama a renderCart
+        confirmRemoveFromCart(productId, renderCart);
       }
 
       function handleClearCart() {
-        if (confirm("¿Vaciar el carrito?")) {
-          clearCart();
-          renderCart();
-        }
+        //el modal de confirmación (cart.js) vacía el carrito y después llama a renderCart
+        confirmClearCart(renderCart);
       }
 
       function handleCheckout() {
-        const session = getSession();
-        const total   = formatPrice(getCartTotal());
-        clearCart();
-        renderCart();
-        alert(
-          `✅ ¡Compra confirmada! (simulada)\n\n` +
-          `Usuario: ${session.email}\n` +
-          `Total: ${total}\n\n` +
-          `Nos contactaremos a la brevedad para coordinar el envío. 🍓`
-        );
+        //el modal (cart.js) pide confirmación, vacía el carrito, llama a renderCart y muestra el mensaje de éxito
+        confirmCheckout(renderCart);
       }
     </script>
     <script src="../js/components/footer.js"></script>

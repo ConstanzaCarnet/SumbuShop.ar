@@ -1347,7 +1347,7 @@ a {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* ─── 15. Opiniones (carrusel al final del index, lo arma js/reviews.js) ─── */
+/* ─── 15. Opiniones (carrusel al final del index, lo arma js/components/reviews.js) ─── */
 .reviews__section {
   padding: 3rem 0 3.5rem;
   background: var(--color-bg);
